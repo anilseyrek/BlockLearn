@@ -17,6 +17,8 @@
 - `npm run start`
 - Open another command line window and go to the project's directory.
 - `pipenv shell`
+- `pip install djangorestframework`
+- `pip install django-rest-knox`
 - Run the migrations:  
   `python manage.py migrate`
 - `python manage.py runserver`
