@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^api/auth/', include('knox.urls')),
 
     url(r'^$', TemplateView.as_view(template_name='exampleapp/itworks.html'), name='home'),
+    url(r'^(?:.*)/?$', TemplateView.as_view(template_name='exampleapp/itworks.html'), name='home'),
 ]
 
 if settings.DEBUG:
