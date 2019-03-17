@@ -3,7 +3,7 @@
 ### Setup
 - On project root, do the following:
 - Create a copy of ``BlockLearn/settings/local.py.example``:  
-  `cp BlockLearn/settings/local.py.example BlockLearn/settings/local.py` (remembering you should replace `BlockLearn` with your project's name!).
+  `cp BlockLearn/settings/local.py.example BlockLearn/settings/local.py`
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
