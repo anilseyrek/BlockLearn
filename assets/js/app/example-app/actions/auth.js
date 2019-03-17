@@ -9,7 +9,7 @@ export const loadUser = () => {
         };
 
         if (token) {
-            headers["Authorization"] = `Token ${token}`;
+            headers["authorization"] = `Token ${token}`;
         }
         return fetch("/api/auth/user/", {headers, })
             .then(res => {
@@ -38,7 +38,11 @@ export const login = (username, password) => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
         let body = JSON.stringify({username, password});
+        const token = getState().auth.token;
 
+        if (token) {
+            headers["authorization"] = `Token ${token}`;
+        }
         return fetch("/api/auth/login/", {headers, body, method: "POST"})
             .then(res => {
                 if (res.status < 500) {
@@ -99,7 +103,11 @@ export const register = (username, password) => {
 export const logout = () => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
+        const token = getState().auth.token;
 
+        if (token) {
+            headers["authorization"] = `Token ${token}`;
+        }
         return fetch("/api/auth/logout/", {headers, body: "", method: "POST"})
             .then(res => {
                 if (res.status === 204) {
