@@ -6,10 +6,6 @@
   `cp BlockLearn/settings/local.py.example BlockLearn/settings/local.py`
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
-- Create the migrations for `users` app (do this, then remove this line from the README):  
-  `python manage.py makemigrations`
-- Run the migrations:  
-  `python manage.py migrate`
 
 ### Tools
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
@@ -21,6 +17,8 @@
 - `npm run start`
 - Open another command line window and go to the project's directory.
 - `pipenv shell`
+- Run the migrations:  
+  `python manage.py migrate`
 - `python manage.py runserver`
 
 #### Celery
