@@ -39,6 +39,7 @@ npm-debug.log
 /env/
 /output/
 /cache/
+shell/
 
 # Spritesmith
 spritesmith-generated/
