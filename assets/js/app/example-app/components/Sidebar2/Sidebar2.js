@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {auth} from "../../actions";
-import $ from 'jquery';
+//import $ from 'jquery';
 
 class Sidebar2 extends Component {
     render(){
@@ -27,7 +27,7 @@ class Sidebar2 extends Component {
                       <li className="active">
                       <a className="js-arrow" href="#">
                           <i className="fas fa-tachometer-alt"></i>Progress: <span id="progressNo"></span>
-                          
+
                       </a>
 
                       </li>

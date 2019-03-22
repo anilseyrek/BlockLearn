@@ -4,6 +4,11 @@ import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import { Provider, connect } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+//import $ from "jquery";
+//window.jQuery = $;
+//window.$ = $;
+
+console.log($);
 
 import {auth} from "./actions";
 import progressApp from "./reducers";
