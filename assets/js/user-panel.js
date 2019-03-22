@@ -1,19 +1,4 @@
-//console.log(document.getElementById("slide-deck").contentWindow.location.href);
-
-//var $ = require('jquery');
-//window.$ = $;
-//window.jQuery = $;
 import 'app/example-app';
-//import '../sass/style.scss';
-//import $ from 'jquery';
-//window.jQuery = $;
-//window.$ = $;
-//import 'expose-loader?$!jquery';
-//import 'expose-loader?jQuery!jquery';
-import $ from 'jquery';
-global.$ = global.jQuery = $;
-
-console.log($);
 
 function doSomething() {
     document.getElementById("progressNo").innerHTML = document.getElementById("slide-deck").contentWindow.location.href.substr(-1) + " / 11" ;
@@ -21,7 +6,6 @@ function doSomething() {
 
 setInterval(doSomething, 2000);
 
-console.log("hedebebbe");
 (function ($) {
   // USE STRICT
   "use strict";
@@ -1540,6 +1524,7 @@ console.log("hedebebbe");
   "use strict";
 
   // Dropdown
+  $(() => {
   try {
     var menu = $('.js-item-menu');
     var sub_menu_is_showed = -1;
@@ -1599,21 +1584,19 @@ console.log("hedebebbe");
 
     });
 
-
   // Sublist Sidebar
   try {
     var arrow = $('.js-arrow');
     arrow.each(function () {
-    console.log("before js-arrow clicked");
       var that = $(this);
       that.on('click', function (e) {
         e.preventDefault();
         that.find(".arrow").toggleClass("up");
         that.toggleClass("open");
         that.parent().find('.js-sub-list').slideToggle("250");
-        console.log("js-arrow clicked");
       });
     });
+
 
   } catch (error) {
     console.log(error);
@@ -1635,6 +1618,7 @@ console.log("hedebebbe");
   } catch (error) {
     console.log(error);
   }
+  })
 })(jQuery);
 (function ($) {
   // USE STRICT
