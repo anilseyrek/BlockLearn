@@ -83,8 +83,8 @@ import React, {Component} from 'react';
                                   </ul>
                               </div>
                               <div className="au-breadcrumb-right">
-                                <button id="save-progress">Save My Progress &nbsp;|&nbsp;</button>
-                                <button id="fullscreen-button" onClick={this.fullscreen}>Fullscreen</button>
+                                <button className="au-btn" id="save-progress">Save My Progress</button>&nbsp;
+                                <button className="au-btn" id="fullscreen-button" onClick={this.fullscreen}>Fullscreen</button>
                               </div>
                           </div>
                       </div>

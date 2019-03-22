@@ -57,14 +57,6 @@ class Sidebar2 extends Component {
                                     <a href="index4.html">
                                         <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
                                 </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i className="fas fa-tachometer-alt"></i>Tokens Demo</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i className="fas fa-tachometer-alt"></i>Coinbase Transactions Demo</a>
-                                </li>
                             </ul>
                         </li>
                       </ul>
