@@ -1,10 +1,14 @@
 export const fetchProgress = () => {
+  console.log("fetch in progress");
     return (dispatch, getState) => {
-        let headers = {"Content-Type": "application/json"};
         let {token} = getState().auth;
 
+        let headers = {
+            "Content-Type": "application/json",
+        };
+
         if (token) {
-            headers["Authorization"] = `Token ${token}`;
+            headers["authorization"] = `Token ${token}`;
         }
 
         return fetch("/api/progress/", {headers, })
@@ -20,6 +24,7 @@ export const fetchProgress = () => {
             })
             .then(res => {
                 if (res.status === 200) {
+                  console.log(res.data);
                     return dispatch({type: 'FETCH_PROGRESS', progress: res.data});
                 } else if (res.status === 401 || res.status === 403) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});

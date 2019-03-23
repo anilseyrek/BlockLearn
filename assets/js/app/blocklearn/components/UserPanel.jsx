@@ -126,6 +126,7 @@ class UserPanel extends Component {
     }
 
     componentDidUpdate() {
+        //this.props.fetchProgress();
       UserPanel.updateUserPanel();
     }
 
@@ -175,6 +176,18 @@ class UserPanel extends Component {
                         </div>
                     </div>
                 </section>
+                <section>deneme<br/>
+                <table>
+                    <tbody>
+                        {this.props.progress.map((progress, id) => (
+                            <tr key={`progress_${progress.id}`}>
+                                <td>{progress.text}</td>
+                                <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
+                                <td><button onClick={() => this.props.deleteProgress(id)}>delete</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table></section>
 
           </div>
         </div>
