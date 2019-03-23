@@ -12,7 +12,7 @@ export default class Header extends Component {
                       <div className="header-wrap2">
                           <div className="logo d-block d-lg-none">
                               <a href="#">
-                                  <img src={"/static/images/icon/logo-white.png"} alt="CoolAdmin" />
+                                  <img src={"/static/images/icon/logo-white.png"} alt="BlockLearn" />
                               </a>
                           </div>
                           <div className="header-button2">
