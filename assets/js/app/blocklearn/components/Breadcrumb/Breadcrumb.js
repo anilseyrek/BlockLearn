@@ -67,7 +67,7 @@ import React, {Component} from 'react';
                       <div className="col-md-12">
                           <div className="au-breadcrumb-content">
                               <div className="au-breadcrumb-left">
-                                  <span className="au-breadcrumb-span">You are here:</span>
+                                  <span className="au-breadcrumb-span"></span>
                                   <ul className="list-unstyled list-inline au-breadcrumb__list">
                                       <li className="list-inline-item active">
                                           <a href="#">Home</a>
