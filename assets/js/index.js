@@ -1,4 +1,4 @@
 // import pages
 //import 'bootstrap-includes';
-import 'app/example-app';
+import 'app/blocklearn';
 import '../sass/style.scss';

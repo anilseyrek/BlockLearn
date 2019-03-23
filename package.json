@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "marked": "^0.6.0",
     "node-sass": "^4.5.3",
+    "perfect-scrollbar": "^1.4.0",
     "popper.js": "^1.12.9",
     "postcss": "^7.0.13",
     "postcss-loader": "^2.0.6",

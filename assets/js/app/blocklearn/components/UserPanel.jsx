@@ -4,36 +4,13 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Sidebar2 from './Sidebar2';
 import Breadcrumb from './Breadcrumb'
+import PerfectScrollbar from 'perfect-scrollbar';
 
 import {progress, auth} from "../actions";
 
-class Progress extends Component {
+class UserPanel extends Component {
 
     static updateUserPanel(){
-      //console.log("denemece");
-      /*
-      $(".animsition").animsition({
-        inClass: 'fade-in',
-        outClass: 'fade-out',
-        inDuration: 900,
-        outDuration: 900,
-        linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"])',
-        loading: true,
-        loadingParentElement: 'html',
-        loadingClass: 'page-loader',
-        loadingInner: '<div class="page-loader__spin"></div>',
-        timeout: false,
-        timeoutCountdown: 5000,
-        onLoadEvent: true,
-        browser: ['animation-duration', '-webkit-animation-duration'],
-        overlay: false,
-        overlayClass: 'animsition-overlay-slide',
-        overlayParentElement: 'html',
-        transition: function (url) {
-          window.location.href = url;
-        }
-      });*/
-
 
       try {
         var arrow = $('.js-arrow');
@@ -124,17 +101,32 @@ class Progress extends Component {
           console.log(error);
         }
 
+
+        try {
+          var jscr1 = $('.js-scrollbar1');
+          if(jscr1[0]) {
+            const ps1 = new PerfectScrollbar('.js-scrollbar1');
+          }
+
+          var jscr2 = $('.js-scrollbar2');
+          if (jscr2[0]) {
+            const ps2 = new PerfectScrollbar('.js-scrollbar2');
+
+          }
+
+        } catch (error) {
+          console.log(error);
+        }
+
     }
 
     componentDidMount() {
         this.props.fetchProgress();
-        Progress.updateUserPanel();
+        UserPanel.updateUserPanel();
     }
 
     componentDidUpdate() {
-      //console.log("component load");
-      //Progress.updateUserPanel();
-      Progress.updateUserPanel();
+      UserPanel.updateUserPanel();
     }
 
     state = {
@@ -163,8 +155,6 @@ class Progress extends Component {
 
 
     render() {
-      //var body = document.getElementsByTagName("BODY")[0];
-      //body.className='animsition';
         return (
 
           <div>
@@ -218,9 +208,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-import "../../../user-panel.js";
-
-export default connect(mapStateToProps, mapDispatchToProps)(Progress);
+export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
 
 /*
 

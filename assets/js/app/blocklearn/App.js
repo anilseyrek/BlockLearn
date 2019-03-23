@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import {auth} from "./actions";
 import progressApp from "./reducers";
 
-import Progress from "./components/Progress";
+import UserPanel from "./components/UserPanel";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -39,7 +39,7 @@ class RootContainerComponent extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <PrivateRoute exact path="/" component={Progress} />
+                    <PrivateRoute exact path="/" component={UserPanel} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />

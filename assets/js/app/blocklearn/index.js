@@ -1,7 +1,3 @@
-//import ColorChanger from './components';
-
-//export default ColorChanger;
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';

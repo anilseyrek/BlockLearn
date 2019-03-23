@@ -1,4 +1,4 @@
-import 'app/example-app';
+import 'app/blocklearn';
 /*
 function doSomething() {
     document.getElementById("progressNo").innerHTML = document.getElementById("slide-deck").contentWindow.location.href.substr(-1) + " / 11" ;
@@ -1481,11 +1481,13 @@ setInterval(doSomething, 2000);
   }
   })
 })(jQuery);
+/*
 (function ($) {
   // USE STRICT
   "use strict";
 
   // Scroll Bar
+  $(() => {
   try {
     var jscr1 = $('.js-scrollbar1');
     if(jscr1[0]) {
@@ -1501,8 +1503,10 @@ setInterval(doSomething, 2000);
   } catch (error) {
     console.log(error);
   }
+  })
 
 })(jQuery);
+*/
 (function ($) {
   // USE STRICT
   "use strict";
