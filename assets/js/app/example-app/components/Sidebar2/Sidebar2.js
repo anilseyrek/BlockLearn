@@ -57,6 +57,14 @@ class Sidebar2 extends Component {
                                     <a href="index4.html">
                                         <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
                                 </li>
+                                <li>
+                                    <a href="index4.html">
+                                        <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">
+                                        <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
+                                </li>
                             </ul>
                         </li>
                       </ul>
@@ -80,22 +88,5 @@ const mapDispatchToProps = dispatch => {
         logout: () => dispatch(auth.logout()),
     }
 }
-
-try {
-  var arrow = $('.js-arrow');
-  arrow.each(function () {
-    var that = $(this);
-    that.on('click', function (e) {
-      e.preventDefault();
-      that.find(".arrow").toggleClass("up");
-      that.toggleClass("open");
-      that.parent().find('.js-sub-list').slideToggle("250");
-    });
-  });
-
-} catch (error) {
-  console.log(error);
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar2);

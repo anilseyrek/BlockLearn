@@ -1,11 +1,11 @@
 import 'app/example-app';
-
+/*
 function doSomething() {
     document.getElementById("progressNo").innerHTML = document.getElementById("slide-deck").contentWindow.location.href.substr(-1) + " / 11" ;
 }
 
 setInterval(doSomething, 2000);
-
+*/
 (function ($) {
   // USE STRICT
   "use strict";
@@ -1262,6 +1262,7 @@ setInterval(doSomething, 2000);
 (function ($) {
     // USE STRICT
     "use strict";
+    $(() => {
     $(".animsition").animsition({
       inClass: 'fade-in',
       outClass: 'fade-out',
@@ -1283,6 +1284,7 @@ setInterval(doSomething, 2000);
         window.location.href = url;
       }
     });
+    })
 
 
   })(jQuery);
@@ -1450,6 +1452,7 @@ setInterval(doSomething, 2000);
 (function ($) {
   // Use Strict
   "use strict";
+  $(() => {
   try {
     var progressbarSimple = $('.js-progressbar-simple');
     progressbarSimple.each(function () {
@@ -1476,6 +1479,7 @@ setInterval(doSomething, 2000);
   } catch (err) {
     console.log(err);
   }
+  })
 })(jQuery);
 (function ($) {
   // USE STRICT
@@ -1502,7 +1506,7 @@ setInterval(doSomething, 2000);
 (function ($) {
   // USE STRICT
   "use strict";
-
+$(() => {
   // Select 2
   try {
 
@@ -1516,9 +1520,11 @@ setInterval(doSomething, 2000);
   } catch (error) {
     console.log(error);
   }
+  })
 
 
 })(jQuery);
+/*
 (function ($) {
   // USE STRICT
   "use strict";
@@ -1620,6 +1626,7 @@ setInterval(doSomething, 2000);
   }
   })
 })(jQuery);
+*/
 (function ($) {
   // USE STRICT
   "use strict";
