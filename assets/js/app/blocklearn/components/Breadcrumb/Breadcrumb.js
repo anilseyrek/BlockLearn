@@ -1,22 +1,28 @@
 // Breadcrumb.js
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
+import {progress, auth} from "../../actions";
 
  class Breadcrumb extends Component {
-   /*
-      var button = document.querySelector('#container .button');
-      button.addEventListener('click', fullscreen);
-      // when you are in fullscreen, ESC and F11 may not be trigger by keydown listener.
-      // so don't use it to detect exit fullscreen
-      document.addEventListener('keydown', function (e) {
-       console.log('key press' + e.keyCode);
-      });
-      // detect enter or exit fullscreen mode
-      document.addEventListener('webkitfullscreenchange', fullscreenChange);
-      document.addEventListener('mozfullscreenchange', fullscreenChange);
-      document.addEventListener('fullscreenchange', fullscreenChange);
-      document.addEventListener('MSFullscreenChange', fullscreenChange);
-*/
+
+     componentDidMount() {
+         //this.props.fetchProgress();
+     }
+
+     submitProgress = (e) => {
+         e.preventDefault();
+
+         if (this.props.progress.length === 0) {
+             let firstProgress = document.getElementById("slide-deck").contentWindow.location.href;
+             this.props.addProgress(firstProgress);
+         } else {
+             let progress = this.props.progress[0];
+             progress.text = document.getElementById("slide-deck").contentWindow.location.href;
+             this.setState({text: progress.text, updateProgressId: progress.id});
+             this.props.updateProgress(0, progress.text);
+         }
+     }
+
       fullscreen() {
        // check if fullscreen mode is available
          if (document.fullscreenEnabled ||
@@ -83,7 +89,7 @@ import React, {Component} from 'react';
                                   </ul>
                               </div>
                               <div className="au-breadcrumb-right">
-                                <button className="au-btn" id="save-progress">Save My Progress</button>&nbsp;
+                                <button className="au-btn" id="save-progress" onClick={this.submitProgress}>Save My Progress</button>&nbsp;
                                 <button className="au-btn" id="fullscreen-button" onClick={this.fullscreen}>Fullscreen</button>
                               </div>
                           </div>
@@ -96,4 +102,29 @@ import React, {Component} from 'react';
     }
 }
 
-export default Breadcrumb;
+const mapStateToProps = state => {
+    return {
+        progress: state.progress,
+        user: state.auth.user,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchProgress: () => {
+            dispatch(progress.fetchProgress());
+        },
+        addProgress: (text) => {
+            return dispatch(progress.addProgress(text));
+        },
+        updateProgress: (id, text) => {
+            return dispatch(progress.updateProgress(id, text));
+        },
+        deleteProgress: (id) => {
+            dispatch(progress.deleteProgress(id));
+        },
+        logout: () => dispatch(auth.logout()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Breadcrumb);
