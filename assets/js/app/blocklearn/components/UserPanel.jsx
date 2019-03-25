@@ -121,16 +121,18 @@ class UserPanel extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchProgress();
         UserPanel.updateUserPanel();
+        this.props.fetchProgress();
+        this.state.isFetching = false;
     }
 
     componentDidUpdate() {
         //this.props.fetchProgress();
-      UserPanel.updateUserPanel();
+      //UserPanel.updateUserPanel();
     }
 
     state = {
+        isFetching: true,
         text: "",
         updateProgressId: null,
     }
@@ -156,6 +158,8 @@ class UserPanel extends Component {
 
 
     render() {
+      //console.log(() => this.props.progress[0].text);
+        const {isFetching} = this.state;
         return (
 
           <div>
@@ -165,29 +169,21 @@ class UserPanel extends Component {
           <div className="page-container2">
 
                   <Header />
-                  <Sidebar />
                   <Breadcrumb />
-                  <section className="statistic">
-                    <div className="section__content section__content">
-                        <div id="slide-deck-container">
-                          <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={"/static/courses/blockchain.html"}>
-                              Fallback text here for unsupporting browsers, of which there are scant few.
-                          </iframe>
+                  {
+                    isFetching ? <div>Loading...</div> : (
+                      <section className="statistic">
+                        <div className="section__content section__content">
+                            <div id="slide-deck-container">
+                              {this.props.progress.slice(0, 1).map((progress) => (
+                                <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.text}>
+                                    Fallback text here for unsupporting browsers, of which there are scant few.
+                                </iframe>
+                              ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
-                <section>deneme<br/>
-                <table>
-                    <tbody>
-                        {this.props.progress.map((progress, id) => (
-                            <tr key={`progress_${progress.id}`}>
-                                <td>{progress.text}</td>
-                                <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
-                                <td><button onClick={() => this.props.deleteProgress(id)}>delete</button></td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table></section>
+                    </section>
+                  )}
 
           </div>
         </div>
@@ -222,6 +218,20 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
+
+/*              <section>{JSON.stringify(this.props.progress[0])}<br/>
+              <table>
+                  <tbody>
+                      {this.props.progress.map((progress, id) => (
+                          <tr key={`progress_${progress.id}`}>
+                              <td>{progress.text}</td>
+                              <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
+                              <td><button onClick={() => this.props.deleteProgress(id)}>delete</button></td>
+                          </tr>
+                      ))}
+                  </tbody>
+              </table></section>
+*/
 
 /*
 

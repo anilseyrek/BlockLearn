@@ -13,11 +13,12 @@ import {progress, auth} from "../../actions";
          e.preventDefault();
 
          if (this.props.progress.length === 0) {
-             let firstProgress = document.getElementById("slide-deck").contentWindow.location.href;
+             let firstProgress = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
              this.props.addProgress(firstProgress);
          } else {
              let progress = this.props.progress[0];
-             progress.text = document.getElementById("slide-deck").contentWindow.location.href;
+             console.log(document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, ''));
+             progress.text = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
              this.setState({text: progress.text, updateProgressId: progress.id});
              this.props.updateProgress(0, progress.text);
          }
