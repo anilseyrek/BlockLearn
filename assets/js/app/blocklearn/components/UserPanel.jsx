@@ -160,6 +160,10 @@ class UserPanel extends Component {
     render() {
       //console.log(() => this.props.progress[0].text);
         const {isFetching} = this.state;
+        let firstCourse = null;
+        if (this.props.progress.length === 0) {
+          firstCourse = "/static/courses/blockchain.html";
+        }
         return (
 
           <div>
@@ -175,11 +179,17 @@ class UserPanel extends Component {
                       <section className="statistic">
                         <div className="section__content section__content">
                             <div id="slide-deck-container">
-                              {this.props.progress.slice(0, 1).map((progress) => (
-                                <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.text}>
+                              {
+                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={firstCourse}>
                                     Fallback text here for unsupporting browsers, of which there are scant few.
-                                </iframe>
-                              ))}
+                                </iframe> : (
+                                this.props.progress.slice(0, 1).map((progress) => (
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.text}>
+                                      Fallback text here for unsupporting browsers, of which there are scant few.
+                                  </iframe>
+                                ))
+
+                              )}
                             </div>
                         </div>
                     </section>
