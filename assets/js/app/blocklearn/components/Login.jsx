@@ -56,7 +56,7 @@ class Login extends Component {
                                     </form>
                                     <div className="register-link">
                                         <p>
-                                            Don't you have account?
+                                            Don't you have account?<br/>
                                             <Link to="/register">Register</Link>
                                         </p>
                                     </div>

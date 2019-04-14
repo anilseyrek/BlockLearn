@@ -8,6 +8,8 @@ import {auth} from "../actions";
 class Login extends Component {
 
     state = {
+        first_name: "",
+        last_name: "",
         username: "",
         email: "",
         password: "",
@@ -15,7 +17,7 @@ class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.register(this.state.username, this.state.email, this.state.password);
+        this.props.register(this.state.first_name, this.state.last_name, this.state.username, this.state.email, this.state.password);
     }
 
     render() {
@@ -35,6 +37,14 @@ class Login extends Component {
                               </div>
                               <div className="login-form">
                                   <form action="" method="post" onSubmit={this.onSubmit}>
+                                      <div className="form-group">
+                                          <label htmlFor="first_name">First Name</label>
+                                          <input className="au-input au-input--full" type="text" id="first_name" name="first_name" placeholder="First Name" onChange={e => this.setState({first_name: e.target.value})} />
+                                      </div>
+                                      <div className="form-group">
+                                          <label htmlFor="last_name">Last Name</label>
+                                          <input className="au-input au-input--full" type="text" id="last_name" name="last_name" placeholder="Last Name" onChange={e => this.setState({last_name: e.target.value})} />
+                                      </div>
                                       <div className="form-group">
                                           <label htmlFor="username">Username</label>
                                           <input className="au-input au-input--full" type="text" id="username" name="username" placeholder="Username" onChange={e => this.setState({username: e.target.value})} />
@@ -56,7 +66,7 @@ class Login extends Component {
                                   </form>
                                   <div className="register-link">
                                       <p>
-                                          Already have account?
+                                          Already have account?<br/>
                                           <Link to="/login">Login</Link>
                                       </p>
                                   </div>
@@ -86,7 +96,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        register: (username, email, password) => dispatch(auth.register(username, email, password)),
+        register: (first_name, last_name, username, email, password) => dispatch(auth.register(first_name, last_name, username, email, password)),
     };
 }
 
