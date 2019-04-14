@@ -33,10 +33,13 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
         '''
 
 class Progress(models.Model):
-    text = models.CharField(max_length=255)
+    course_URL = models.CharField(max_length=255, default="/static/courses/blockchain.html")
+    course_name = models.CharField(max_length=255, default="Blockchain 101")
+    course_code = models.CharField(max_length=255, default="BC-101")
+    progress = models.CharField(max_length=255, default="0")
     owner = models.ForeignKey(User, related_name="progress",
                               on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text
+        return self.progress

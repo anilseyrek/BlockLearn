@@ -32,7 +32,7 @@ export const fetchProgress = () => {
     }
 }
 
-export const addProgress = text => {
+export const addProgress = (course_URL, course_name, course_code, progress )=> {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
         let {token} = getState().auth;
@@ -41,7 +41,7 @@ export const addProgress = text => {
             headers["Authorization"] = `Token ${token}`;
         }
 
-        let body = JSON.stringify({text, });
+        let body = JSON.stringify({course_URL, course_name, course_code, progress, });
         return fetch("/api/progress/", {headers, method: "POST", body})
             .then(res => {
                 if (res.status < 500) {
@@ -64,7 +64,7 @@ export const addProgress = text => {
     }
 }
 
-export const updateProgress = (index, text) => {
+export const updateProgress = (index, course_URL, course_name, course_code, progress) => {
     return (dispatch, getState) => {
 
         let headers = {"Content-Type": "application/json"};
@@ -74,7 +74,7 @@ export const updateProgress = (index, text) => {
             headers["Authorization"] = `Token ${token}`;
         }
 
-        let body = JSON.stringify({text, });
+        let body = JSON.stringify({course_URL, course_name, course_code, progress, });
         let progressId = getState().progress[index].id;
 
         return fetch(`/api/progress/${progressId}/`, {headers, method: "PUT", body})

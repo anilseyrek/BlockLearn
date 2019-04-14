@@ -133,25 +133,28 @@ class UserPanel extends Component {
 
     state = {
         isFetching: true,
-        text: "",
+        course_URL: "",
+        course_code: "",
+        course_name: "",
+        progress: "",
         updateProgressId: null,
     }
 
     resetForm = () => {
-        this.setState({text: "", updateProgressId: null});
+        this.setState({course_URL: "", progress: "", updateProgressId: null});
     }
 
     selectForEdit = (id) => {
         let progress = this.props.progress[id];
-        this.setState({text: progress.text, updateProgressId: id});
+        this.setState({course_URL: progress.course_URL, progress: progress.progress, updateProgressId: id});
     }
 
     submitProgress = (e) => {
         e.preventDefault();
         if (this.state.updateProgressId === null) {
-            this.props.addProgress(this.state.text).then(this.resetForm)
+            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress).then(this.resetForm)
         } else {
-            this.props.updateProgress(this.state.updateProgressId, this.state.text).then(this.resetForm);
+            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress).then(this.resetForm);
         }
     }
 
@@ -184,7 +187,7 @@ class UserPanel extends Component {
                                     Fallback text here for unsupporting browsers, of which there are scant few.
                                 </iframe> : (
                                 this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.text}>
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.course_URL}>
                                       Fallback text here for unsupporting browsers, of which there are scant few.
                                   </iframe>
                                 ))
@@ -214,11 +217,11 @@ const mapDispatchToProps = dispatch => {
         fetchProgress: () => {
             dispatch(progress.fetchProgress());
         },
-        addProgress: (text) => {
-            return dispatch(progress.addProgress(text));
+        addProgress: (course_URL, course_name, course_code, progress) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress));
         },
-        updateProgress: (id, text) => {
-            return dispatch(progress.updateProgress(id, text));
+        updateProgress: (id, course, progress) => {
+            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));
