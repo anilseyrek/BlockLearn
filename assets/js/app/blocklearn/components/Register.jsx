@@ -9,12 +9,13 @@ class Login extends Component {
 
     state = {
         username: "",
+        email: "",
         password: "",
     }
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.register(this.state.username, this.state.password);
+        this.props.register(this.state.username, this.state.email, this.state.password);
     }
 
     render() {
@@ -37,6 +38,10 @@ class Login extends Component {
                                       <div className="form-group">
                                           <label htmlFor="username">Username</label>
                                           <input className="au-input au-input--full" type="text" id="username" name="username" placeholder="Username" onChange={e => this.setState({username: e.target.value})} />
+                                      </div>
+                                      <div className="form-group">
+                                          <label htmlFor="email">Email</label>
+                                          <input className="au-input au-input--full" type="text" id="email" name="email" placeholder="Email" onChange={e => this.setState({email: e.target.value})} />
                                       </div>
                                       <div className="form-group">
                                           <label htmlFor="password">Password</label>
@@ -81,7 +86,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        register: (username, password) => dispatch(auth.register(username, password)),
+        register: (username, email, password) => dispatch(auth.register(username, email, password)),
     };
 }
 

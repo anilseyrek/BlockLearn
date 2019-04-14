@@ -69,10 +69,10 @@ export const login = (username, password) => {
     }
 }
 
-export const register = (username, password) => {
+export const register = (username, email, password) => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
-        let body = JSON.stringify({username, password});
+        let body = JSON.stringify({username, email, password});
 
         return fetch("/api/auth/register/", {headers, body, method: "POST"})
             .then(res => {
