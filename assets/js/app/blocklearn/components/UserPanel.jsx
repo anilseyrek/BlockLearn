@@ -187,7 +187,7 @@ class UserPanel extends Component {
                                     Fallback text here for unsupporting browsers, of which there are scant few.
                                 </iframe> : (
                                 this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={progress.course_URL}>
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress}`}>
                                       Fallback text here for unsupporting browsers, of which there are scant few.
                                   </iframe>
                                 ))
@@ -220,7 +220,7 @@ const mapDispatchToProps = dispatch => {
         addProgress: (course_URL, course_name, course_code, progress) => {
             return dispatch(progress.addProgress(course_URL, course_name, course_code, progress));
         },
-        updateProgress: (id, course, progress) => {
+        updateProgress: (id, course_URL, course_name, course_code, progress) => {
             return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress));
         },
         deleteProgress: (id) => {
