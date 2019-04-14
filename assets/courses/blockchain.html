@@ -224,12 +224,13 @@
 					Reveal.slide( indices.h, indices.v );
 				}
 			} );
-			Reveal.addEventListener( 'afterchapter1', function() {
+			Reveal.addEventListener( 'slidechanged', function() {
 				//var element = document.querySelector('navigate-right'); // grab a reference to your element
 				//element.addEventListener('click', getChapterResult(1));
 				//document.domain = "oppia.org"
-				var chapterResult = getChapterResult(1);
-				console.log(chapterResult);
+				//var chapterResult = getChapterResult(1);
+				//console.log("exploration1");
+				parent.postMessage('deneme');
 				//document.domain = ""
 /*
 				if(parseInt(quizResult.substring(0, quizResult.length-1), 10) < 50){

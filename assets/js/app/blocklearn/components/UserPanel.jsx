@@ -10,6 +10,53 @@ import {progress, auth} from "../actions";
 
 class UserPanel extends Component {
 
+    constructor(props){
+      super(props);
+      this.state = {
+        message: ''
+      };
+      this.handleEnter = this.handleEnter.bind(this);
+      this.handleKeyPress = this.handleKeyPress.bind(this);
+
+    }
+
+    componentDidMount() {
+        UserPanel.updateUserPanel();
+        this.props.fetchProgress();
+        this.state.isFetching = false;
+        document.addEventListener('keydown', this.handleKeyPress);
+    }
+
+    componentWillUnmount(){
+      document.removeEventListener('keydown', this.handleKeyPress);
+    }
+
+    componentDidUpdate() {
+        //this.props.fetchProgress();
+      //UserPanel.updateUserPanel();
+    }
+
+    state = {
+        isFetching: true,
+        course_URL: "",
+        course_code: "",
+        course_name: "",
+        progress_number: "",
+        updateProgressId: null,
+    }
+    // change code above this line
+    handleEnter = () => {
+      this.setState({
+        message: this.state.message + 'You pressed the enter key! '
+      });
+      console.log("Enter pressed");
+    }
+    handleKeyPress = (event) => {
+      if (event.keyCode === 13) {
+        this.handleEnter();
+      }
+    }
+
     static updateUserPanel(){
 
       try {
@@ -84,6 +131,40 @@ class UserPanel extends Component {
           right_sidebar.removeClass("show-sidebar");
 
         });
+        /*
+        $('iframe').load(function(){
+             //then set up some access points
+             //var contents = $(this).contents(); // contents of the iframe
+             //$(contents).find("body").on('mouseup', function(event) {
+                 alert('test');
+             //});
+         });*/
+
+        try {
+          var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+          var eventer = window[eventMethod];
+          var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+          // Listen to message from child window
+          eventer(messageEvent,function(e) {
+            var courseURL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
+            //console.log(courseURL,' parent received message!:  ',e.data);
+            //Regex for progress number
+             var re1='.*?';	// Non-greedy match on filler
+             var re2='(#)';	// Any Single Character 1
+             var re3='(\\/)';	// Any Single Character 2
+             var re4='(\\d+)';	// Integer Number 1
+
+            var p = new RegExp(re1+re2+re3+re4,["i"]);
+            var m = p.exec(courseURL);
+            //Check if URL contains progress number
+            let progressText = (m !== null) ? m[3] : "0";
+            document.getElementById("progressNo").innerHTML = progressText + " / 11" ;;
+          },false);
+
+        } catch (error) {
+          console.log(error);
+        }
 
         try {
           // Hamburger Menu
@@ -120,41 +201,21 @@ class UserPanel extends Component {
 
     }
 
-    componentDidMount() {
-        UserPanel.updateUserPanel();
-        this.props.fetchProgress();
-        this.state.isFetching = false;
-    }
-
-    componentDidUpdate() {
-        //this.props.fetchProgress();
-      //UserPanel.updateUserPanel();
-    }
-
-    state = {
-        isFetching: true,
-        course_URL: "",
-        course_code: "",
-        course_name: "",
-        progress: "",
-        updateProgressId: null,
-    }
-
     resetForm = () => {
-        this.setState({course_URL: "", progress: "", updateProgressId: null});
+        this.setState({course_URL: "", progress_number: "", updateProgressId: null});
     }
 
     selectForEdit = (id) => {
         let progress = this.props.progress[id];
-        this.setState({course_URL: progress.course_URL, progress: progress.progress, updateProgressId: id});
+        this.setState({course_URL: progress.course_URL, progress_number: progress.progress_number, updateProgressId: id});
     }
 
     submitProgress = (e) => {
         e.preventDefault();
         if (this.state.updateProgressId === null) {
-            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress).then(this.resetForm)
+            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm)
         } else {
-            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress).then(this.resetForm);
+            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm);
         }
     }
 
@@ -184,11 +245,11 @@ class UserPanel extends Component {
                             <div id="slide-deck-container">
                               {
                                 firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={firstCourse}>
-                                    Fallback text here for unsupporting browsers, of which there are scant few.
+                                    Your browser is not supported.
                                 </iframe> : (
                                 this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress}`}>
-                                      Fallback text here for unsupporting browsers, of which there are scant few.
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress_number}`} >
+                                      Your browser is not supported.
                                   </iframe>
                                 ))
 
@@ -217,11 +278,11 @@ const mapDispatchToProps = dispatch => {
         fetchProgress: () => {
             dispatch(progress.fetchProgress());
         },
-        addProgress: (course_URL, course_name, course_code, progress) => {
-            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress));
+        addProgress: (course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number));
         },
-        updateProgress: (id, course_URL, course_name, course_code, progress) => {
-            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress));
+        updateProgress: (id, course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));

@@ -16,10 +16,10 @@ import {progress, auth} from "../../actions";
              let firstProgress = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
              this.props.addProgress(firstProgress);
          } else {
-             let progress = this.props.progress[0];
+             let _progress = this.props.progress[0];
              //console.log(document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, ''));
-             progress.course_URL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
-             let courseURL = progress.course_URL; //.substring(progress.course_URL.indexOf("#") + 1);;
+             _progress.course_URL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
+             let courseURL = _progress.course_URL; //.substring(progress.course_URL.indexOf("#") + 1);;
              //Regex for progress number
               var re1='.*?';	// Non-greedy match on filler
               var re2='(#)';	// Any Single Character 1
@@ -28,12 +28,14 @@ import {progress, auth} from "../../actions";
 
              var p = new RegExp(re1+re2+re3+re4,["i"]);
              var m = p.exec(courseURL);
-             let progressText = m[3];
+             //Check if URL contains progress number
+             let progressText = (m !== null) ? m[3] : "0";
+             console.log(progressText);
              //Extract static course
              courseURL = courseURL.substring(0, courseURL.indexOf("#"));
 
-             this.setState({course_URL: courseURL, progress: progressText, updateProgressId: progress.id});
-             this.props.updateProgress(0, courseURL, progress.course_name, progress.course_code, progressText);
+             this.setState({course_URL: courseURL, progress_number: progressText, updateProgressId: progress.id});
+             this.props.updateProgress(0, courseURL, _progress.course_name, _progress.course_code, progressText);
          }
      }
 
@@ -131,8 +133,8 @@ const mapDispatchToProps = dispatch => {
         addProgress: (course_URL) => {
             return dispatch(progress.addProgress(course_URL));
         },
-        updateProgress: (id, course_URL, course_name, course_code, progressText) => {
-            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progressText));
+        updateProgress: (id, course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));
