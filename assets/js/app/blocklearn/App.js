@@ -9,6 +9,7 @@ import {auth} from "./actions";
 import progressApp from "./reducers";
 
 import UserPanel from "./components/UserPanel";
+import CodingPanel from "./components/CodingPanel";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -66,6 +67,7 @@ class RootContainerComponent extends Component {
             <BrowserRouter>
                 <Switch>
                     <PrivateRoute exact path="/" component={UserPanel} />
+                    <PrivateRoute exact path="/coding" component={CodingPanel} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />

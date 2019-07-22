@@ -11,15 +11,15 @@ import Timecode from 'react-timecode';
 
 import {progress, auth} from "../actions";
 
-class UserPanel extends Component {
+class CodingPanel extends Component {
 
     constructor(props){
       super(props);
       this.state = {
         message: '',
-        timerOn: false,
+        timerOn: true,
         progressSaved: false,
-        contentActive: false,
+        contentActive: true,
       };
       this.handleEnter = this.handleEnter.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -28,7 +28,7 @@ class UserPanel extends Component {
     }
 
     componentDidMount() {
-        UserPanel.updateUserPanel();
+        CodingPanel.updateCodingPanel();
         this.props.fetchProgress();
         this.state.isFetching = false;
         document.addEventListener('keydown', this.handleKeyPress);
@@ -41,7 +41,7 @@ class UserPanel extends Component {
 
     componentDidUpdate() {
         //this.props.fetchProgress();
-      //UserPanel.updateUserPanel();
+      //CodingPanel.updateCodingPanel();
     }
 
     iframeLoad(e){
@@ -63,6 +63,8 @@ class UserPanel extends Component {
       this.setState({
         message: this.state.message + 'You pressed the space key! '
       });
+      console.log("Enter pressed");
+      console.log(this.props);
     }
     handleKeyPress = (event) => {
       //
@@ -81,10 +83,14 @@ class UserPanel extends Component {
       })
     }
     handleIframeChange = (e) => {
+      /*if (e.origin !== 'https://localhost:3000/') {
+        return;
+      }*/
+      console.log(e.data);
       if (e.data === "slidechanged" || e.data === "Reveal_Initialized") {
 
         var courseURL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
-
+        //console.log(courseURL,' parent received message!:  ',e.data);
         //Regex for progress number
          var re1='.*?';	// Non-greedy match on filler
          var re2='(#)';	// Any Single Character 1
@@ -95,13 +101,12 @@ class UserPanel extends Component {
         var regex2 = new RegExp(re1+re2+re3+re1+re3+re4,["i"]);
         var m = regex1.exec(courseURL);
         var n = regex2.exec(courseURL);
+
+        console.log(n);
         //Check if URL contains progress number
         let progressText = (m !== null) ? m[3] : "0";
-        //Extract static course
-        courseURL = courseURL.substring(0, courseURL.indexOf("#"));
-
         document.getElementById("progressNo").innerHTML = progressText + " / 11" ;
-        //console.log(this.state.progressSaved);
+        console.log(this.state.progressSaved);
         if(e.data === "slidechanged" && (!(this.state.progressSaved) || n === null)) this.setState({timerOn: true});
         else this.setState({timerOn: false, progressSaved: false});
         /*{
@@ -109,12 +114,9 @@ class UserPanel extends Component {
           else this.setState({timerOn: false});
         }*/
       }
-      if(e.data === "goToCoding") {
-        this.props.history.push('/coding');
-      }
     };
 
-    static updateUserPanel(){
+    static updateCodingPanel(){
 
       try {
         var arrow = $('.js-arrow');
@@ -263,18 +265,18 @@ class UserPanel extends Component {
           <div className="page-container2">
 
                   <Header />
-                  <Breadcrumb courseName="Introduction to Blockchain" handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
+                  <Breadcrumb courseName="Smart Contract Development" handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
                   {
                     isFetching ? <div>Loading...</div> : (
                       <section className="statistic">
                         <div className="section__content section__content">
                             <div id="slide-deck-container">
                               {
-                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={firstCourse}>
+                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src="http://remix.ethereum.org">
                                     Your browser is not supported.
                                 </iframe> : (
                                 this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress_number}`} onLoad={(e) => this.iframeLoad(e)} >
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src="http://remix.ethereum.org" onLoad={(e) => this.iframeLoad(e)} >
                                       Your browser is not supported.
                                   </iframe>
                                 ))
@@ -307,8 +309,8 @@ const mapDispatchToProps = dispatch => {
         addProgress: (course_URL, course_name, course_code, progress_number) => {
             return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number));
         },
-        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number));
+        updateProgress: (id, course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));
@@ -317,7 +319,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(CodingPanel);
 
 /*              <section>{JSON.stringify(this.props.progress[0])}<br/>
               <table>

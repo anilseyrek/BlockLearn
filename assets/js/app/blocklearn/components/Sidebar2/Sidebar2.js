@@ -2,10 +2,59 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {auth} from "../../actions";
+import {progress, auth} from "../../actions";
+//import Timer from '../Timer';
+import Timer from 'react-timer-wrapper';
+import Timecode from 'react-timecode';
+import Content from '../Content';
 //import $ from 'jquery';
 
 class Sidebar2 extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        timerOn: false,
+        progressSaved: false,
+      }
+    }
+
+    submitProgress() {
+
+        if (this.props.progress.length === 0) {
+            let firstProgress = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
+            this.props.addProgress(firstProgress);
+        } else {
+            let courseIndex = 0;
+            let _progress = this.props.progress[courseIndex];
+            _progress.course_URL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
+            let courseURL = _progress.course_URL; //.substring(progress.course_URL.indexOf("#") + 1);;
+            //Regex for progress number
+             var re1='.*?';	// Non-greedy match on filler
+             var re2='(#)';	// Any Single Character 1
+             var re3='(\\/)';	// Any Single Character 2
+             var re4='(\\d+)';	// Integer Number 1
+
+            var p = new RegExp(re1+re2+re3+re4,["i"]);
+            var m = p.exec(courseURL);
+            //Check if URL contains progress number
+            let progressText = (m !== null) ? m[3] : "0";
+            //Extract static course
+            courseURL = courseURL.substring(0, courseURL.indexOf("#"));
+
+            //console.log(this.props);
+            this.props.progress[courseIndex].progress_number = progressText;
+
+            this.setState({course_URL: courseURL, progress_number: progressText, updateProgressId: _progress.id});
+            this.props.updateProgress(courseIndex, _progress.id, courseURL, _progress.course_name, _progress.course_code, progressText);
+            this.setState({timerOn: false});
+        }
+    }
+
+    onClickSignOut(e) {
+      this.submitProgress();
+      this.props.logout();
+    }
+
     render(){
         return (
           <aside className="menu-sidebar2">
@@ -20,7 +69,7 @@ class Sidebar2 extends Component {
                         <img src={"/static/images/icon/1.jpg"} alt="Anıl Seyrek" />
                     </div>
                     <h4 className="name">{this.props.user.username}</h4>
-                    <a href="#" onClick={this.props.logout}>Sign out</a>
+                    <a href="#" onClick={(e) => this.onClickSignOut(e)} >Sign out</a>
                 </div>
                 <nav className="navbar-sidebar2">
                     <ul className="list-unstyled navbar__list">
@@ -32,42 +81,35 @@ class Sidebar2 extends Component {
 
                       </li>
                     </ul>
-                    <ul className="list-unstyled navbar__list">
-                        <li className="active has-sub">
-                            <a className="js-arrow" href="#">
-                                <i className="fas fa-tachometer-alt"></i>Course Progress
-                                <span className="arrow">
-                                    <i className="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul className="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">
-                                        <i className="fas fa-check"></i>Hash Demo</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">
-                                        <i className="fas fa-check"></i>Block Demo</a>
-                                </li>
-                                <li className="active ">
-                                    <a href="index3.html">
-                                        <i className="fas fa-tachometer-alt"></i>Blockchain Demo</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i className="fas fa-tachometer-alt"></i>Distributed Ledger Demo</a>
-                                </li>
-                            </ul>
-                        </li>
-                      </ul>
+                        <ul className="list-unstyled navbar__list">
+                          <li className="active">
+                          <a className="js-arrow" href="#">
+                              <i className="fas fa-tachometer-alt"></i>Timer:&nbsp;&nbsp;
+                              <span id="timer">
+                                <div id="sidebar" style={{display : 'inline-block'}} >
+                              <React.Fragment>
+                              <Timer active={this.props.timerOn} duration={null}>
+                                <Timecode />
+                              </Timer>
+                              </React.Fragment>
+                                </div>
+                              </span>
+
+                          </a>
+
+                          </li>
+                        </ul>
+                        {
+                          !this.props.contentActive ? <div></div> : (
+                        <ul className="list-unstyled navbar__list">
+                            <li className="active has-sub">
+                                <a className="js-arrow" href="#">
+                                    <i className="fas fa-tachometer-alt"></i>Course
+                                </a>
+                            </li>
+                            <Content />
+                          </ul>
+                    )}
                   </nav>
               </div>
           </aside>
@@ -77,14 +119,29 @@ class Sidebar2 extends Component {
 
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
+        progress: state.progress,
         user: state.auth.user,
+        timerOn: ownProps.timerOn,
+        contentActive: ownProps.contentActive,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchProgress: () => {
+            dispatch(progress.fetchProgress());
+        },
+        addProgress: (course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number));
+        },
+        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number));
+        },
+        deleteProgress: (id) => {
+            dispatch(progress.deleteProgress(id));
+        },
         logout: () => dispatch(auth.logout()),
     }
 }

@@ -14,13 +14,13 @@ export default function progress(state=initialState, action) {
             return [...state, action.progress];
 
         case 'UPDATE_PROGRESS':
-            let progressToUpdate = progressList[action.index]
-            progressToUpdate.text = action.progress.text;
-            progressList.splice(action.index, 1, progressToUpdate);
+            let progressToUpdate = progressList[action.courseIndex];
+            progressToUpdate.course_URL = action.progress.course_URL;
+            progressList.splice(action.courseIndex, 1, progressToUpdate);
             return progressList;
 
         case 'DELETE_PROGRESS':
-            progressList.splice(action.index, 1);
+            progressList.splice(action.courseIndex, 1);
             return progressList;
 
         default:

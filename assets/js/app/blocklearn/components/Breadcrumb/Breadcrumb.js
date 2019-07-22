@@ -2,8 +2,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {progress, auth} from "../../actions";
+import { TimerContext } from '../UserPanel';
 
  class Breadcrumb extends Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          timerOn: false,
+          progressSaved: false,
+        }
+      }
+    //static contextType = TimerContext;*/
 
      componentDidMount() {
          //this.props.fetchProgress();
@@ -16,7 +25,8 @@ import {progress, auth} from "../../actions";
              let firstProgress = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
              this.props.addProgress(firstProgress);
          } else {
-             let _progress = this.props.progress[0];
+             let courseIndex = 0;
+             let _progress = this.props.progress[courseIndex];
              //console.log(document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, ''));
              _progress.course_URL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
              let courseURL = _progress.course_URL; //.substring(progress.course_URL.indexOf("#") + 1);;
@@ -30,12 +40,20 @@ import {progress, auth} from "../../actions";
              var m = p.exec(courseURL);
              //Check if URL contains progress number
              let progressText = (m !== null) ? m[3] : "0";
-             console.log(progressText);
+             //console.log(progressText);
              //Extract static course
              courseURL = courseURL.substring(0, courseURL.indexOf("#"));
 
-             this.setState({course_URL: courseURL, progress_number: progressText, updateProgressId: progress.id});
-             this.props.updateProgress(0, courseURL, _progress.course_name, _progress.course_code, progressText);
+             this.props.progress[courseIndex].progress_number = progressText;
+
+             this.setState({course_URL: courseURL, progress_number: progressText, updateProgressId: _progress.id});
+             //console.log(progressText);
+             this.props.updateProgress(courseIndex, _progress.id, courseURL, _progress.course_name, _progress.course_code, progressText);
+             this.setState({timerOn: false});
+             var handleTime = this.props.handleTimer;
+             handleTime(false);
+             var handleProgressSave = this.props.handleProgressSave;
+             handleProgressSave(true);
          }
      }
 
@@ -101,7 +119,7 @@ import {progress, auth} from "../../actions";
                                       <li className="list-inline-item seprate">
                                           <span>/</span>
                                       </li>
-                                      <li className="list-inline-item">Introduction to Blockchain</li>
+                                      <li className="list-inline-item">{this.props.courseName}</li>
                                   </ul>
                               </div>
                               <div className="au-breadcrumb-right">
@@ -118,10 +136,13 @@ import {progress, auth} from "../../actions";
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
         progress: state.progress,
         user: state.auth.user,
+        timerOn: ownProps.timerOn,
+        progressSaved: ownProps.progressSaved,
+        courseName: ownProps.courseName,
     }
 }
 
@@ -133,8 +154,8 @@ const mapDispatchToProps = dispatch => {
         addProgress: (course_URL) => {
             return dispatch(progress.addProgress(course_URL));
         },
-        updateProgress: (id, course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number));
+        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number) => {
+            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));

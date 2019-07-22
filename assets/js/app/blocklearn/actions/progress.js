@@ -64,7 +64,7 @@ export const addProgress = (course_URL, course_name, course_code, progress_numbe
     }
 }
 
-export const updateProgress = (index, course_URL, course_name, course_code, progress_number) => {
+export const updateProgress = (courseIndex, index, course_URL, course_name, course_code, progress_number) => {
     return (dispatch, getState) => {
 
         let headers = {"Content-Type": "application/json"};
@@ -74,9 +74,8 @@ export const updateProgress = (index, course_URL, course_name, course_code, prog
             headers["authorization"] = `Token ${token}`;
         }
 
-        console.log(progress_number);
         let body = JSON.stringify({course_URL, course_name, course_code, progress_number, });
-        let progressId = getState().progress[index].id;
+        let progressId = index;
 
         return fetch(`/api/progress/${progressId}/`, {headers, method: "PUT", body})
             .then(res => {
@@ -91,7 +90,7 @@ export const updateProgress = (index, course_URL, course_name, course_code, prog
             })
             .then(res => {
                 if (res.status === 200) {
-                    return dispatch({type: 'UPDATE_PROGRESS', progress: res.data, index});
+                    return dispatch({type: 'UPDATE_PROGRESS', progress: res.data, courseIndex});
                 } else if (res.status === 401 || res.status === 403) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
                     throw res.data;

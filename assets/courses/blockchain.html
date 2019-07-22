@@ -160,7 +160,8 @@
 				<section style="text-align: left;">
 					<h1>THE END</h1>
 					<p>
-						- <a href="http://blocklearn.xyz">Explore more on BlockLearn</a> <br>
+						Continue with simple Solidity programming course:<br>
+						<button class="au-btn--submit" onclick="goToCoding()"> Smart Contract Development </button>
 					</p>
 				</section>
 
@@ -189,6 +190,10 @@
 				var iframe = document.getElementById('selection-quiz');
 				var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
 				console.log(innerDoc.getElementById('pre-selected-options').selectedOptions);
+				goToSlide(5);
+			}
+			function goToCoding(){
+				parent.postMessage("goToCoding");
 			}
 		</script>
 
@@ -214,6 +219,7 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+			parent.postMessage("Reveal_Initialized");
 			Reveal.addEventListener( 'afterquiz1', function() {
 				var quizResult = getQuizResult(1);
 				if(parseInt(quizResult.substring(0, quizResult.length-1), 10) < 50){
@@ -230,7 +236,7 @@
 				//document.domain = "oppia.org"
 				//var chapterResult = getChapterResult(1);
 				//console.log("exploration1");
-				parent.postMessage('deneme');
+				parent.postMessage('slidechanged');
 				//document.domain = ""
 /*
 				if(parseInt(quizResult.substring(0, quizResult.length-1), 10) < 50){
