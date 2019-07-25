@@ -19,7 +19,6 @@
 - `PIP_NO_CACHE_DIR=off pipenv install --dev`
 - `PIP_NO_CACHE_DIR=off pipenv install djangorestframework`
 - `PIP_NO_CACHE_DIR=off pipenv install django-rest-knox`
-- `PIP_NO_CACHE_DIR=off pipenv install -e git+https://github.com/djsutho/django-debug-toolbar-request-history.git#egg=django-debug-toolbar-2`
 - Run the migrations:  
   `python manage.py migrate`
 - `python manage.py runserver`
