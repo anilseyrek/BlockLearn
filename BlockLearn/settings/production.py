@@ -21,7 +21,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = base_dir_join('mediafiles')
 MEDIA_URL = '/media/'
 
-SERVER_EMAIL = 'blocklearn@innovative.team'
+SERVER_EMAIL = 'anilseyrek@gmail.com'
 
 EMAIL_HOST = 'mail.innovative.team'
 EMAIL_HOST_USER = config('blocklearn@innovative.team')
