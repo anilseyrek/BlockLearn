@@ -6,7 +6,7 @@ from .base import *  # noqa
 
 DEBUG = False
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = '!qnwkc9xh^n$)(4gskq+1k0k3^luwam%rqr%lq(lku5&g#0$7n'
 
 DATABASES = {
     'default': config('DATABASE_URL', cast=db_url),
