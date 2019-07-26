@@ -13,7 +13,7 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-ALLOWED_HOSTS =.localhost, .blocklearnxyz.herokuapp.com #= config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 STATIC_ROOT = base_dir_join('staticfiles')
 STATIC_URL = '/static/'
