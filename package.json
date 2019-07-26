@@ -4,6 +4,9 @@
   "private": true,
   "description": "BlockLearn frontend assets.",
   "main": "index.js",
+  "engines": {
+    "node": "8.5.0"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch",
