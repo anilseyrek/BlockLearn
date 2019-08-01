@@ -7,7 +7,7 @@ name = "pypi"
 bandit = "*"
 coverage = "*"
 django-debug-toolbar = "~=1.11"
-django-debug-toolbar-request-history = {editable = true,git = "https://github.com/djsutho/django-debug-toolbar-request-history.git",ref = "django-debug-toolbar-2"}
+django-debug-toolbar-request-history = "*"
 django-naomi = "*"
 isort = "*"
 model-mommy = "*"
