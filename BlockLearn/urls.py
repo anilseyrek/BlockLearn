@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url  # noqa
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.generic.simple import redirect_to
 from users import endpoints
 
 import django_js_reverse.views
@@ -12,7 +13,7 @@ urlpatterns = [
     url(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
     url(r'^api/', include(endpoints)),
     url(r'^api/auth/', include('knox.urls')),
-    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/images/favicon.ico'}),
+    url(r'^favicon\.ico$', redirect_to, {'url': '/static/images/favicon.ico'}),
 
     url(r'^$', TemplateView.as_view(template_name='exampleapp/itworks.html'), name='home'),
     url(r'^(?:.*)/?$', TemplateView.as_view(template_name='exampleapp/itworks.html'), name='home'),
