@@ -12,7 +12,7 @@
 
 ### Running the project
 - Open a command line window and go to the project's directory.
-- `sudo npm install`
+- `npm install`
 - If any error occurs, try with deleting `package-lock.json` file.
 - `npm run start`
 - Open another command line window and go to the project's directory.
@@ -20,7 +20,6 @@
 - `PIP_NO_CACHE_DIR=off pipenv install --dev`
 - `PIP_NO_CACHE_DIR=off pipenv install djangorestframework`
 - `PIP_NO_CACHE_DIR=off pipenv install django-rest-knox`
-- `PIP_NO_CACHE_DIR=off pipenv install -e git+https://github.com/djsutho/django-debug-toolbar-request-history.git@0.0.11#egg=django-debug-toolbar-2`
 - Run the migrations:  
   `python manage.py migrate`
 - `python manage.py runserver`
