@@ -2,7 +2,6 @@ from django.conf import settings
 from django.conf.urls import include, url  # noqa
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.views.generic.simple import redirect_to
 from users import endpoints
 
 import django_js_reverse.views
