@@ -15,7 +15,7 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
-STATIC_ROOT = base_dir_join('staticfiles')
+STATIC_ROOT = base_dir_join('assets')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = base_dir_join('mediafiles')
