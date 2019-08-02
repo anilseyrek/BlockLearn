@@ -12,7 +12,8 @@
 
 ### Running the project
 - Open a command line window and go to the project's directory.
-- `sudo npm install`
+- `npm install`
+- If any error occurs, try with deleting `package-lock.json` file.
 - `npm run start`
 - Open another command line window and go to the project's directory.
 - `PIP_NO_CACHE_DIR=off pipenv shell`

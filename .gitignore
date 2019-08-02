@@ -1,6 +1,7 @@
 *.pyc
 /db.sqlite3
 .DS_Store
+/package-lock.json
 */settings/local.py
 /staticfiles/*
 /mediafiles/*
