@@ -36,6 +36,7 @@ psutil = "*"
 ipython = "*"
 djangorestframework = "*"
 django-rest-knox = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.6"
