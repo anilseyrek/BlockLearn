@@ -10,7 +10,7 @@ DEBUG = False
 
 SECRET_KEY = '!qnwkc9xh^n$)(4gskq+1k0k3^luwam%rqr%lq(lku5&g#0$7n'
 
-DATABASES = {'default' : dj_database_url.config(default=os.environ["postgres://cvmfapzkjvbiwx:0caeaa9119af2d011666e76facd90d378e7c98edd7ff6f6b441a4b1715e9ae8a@ec2-54-228-246-214.eu-west-1.compute.amazonaws.com:5432/d5o940hvr74itq"]) }
+#DATABASES = {'default' : dj_database_url.config(default=os.environ["postgres://cvmfapzkjvbiwx:0caeaa9119af2d011666e76facd90d378e7c98edd7ff6f6b441a4b1715e9ae8a@ec2-54-228-246-214.eu-west-1.compute.amazonaws.com:5432/d5o940hvr74itq"]) }
 #DATABASES = {
 #    'default': config('DATABASE_URL', cast=db_url),
 #}
