@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "461fe55c64107ffafb80561c8509901b305709267de2da57dd2c395262e197ee"
+            "sha256": "605eb15e4ce1089cdd4462455270228d860312bd085cb716195b1ddf5aad25f1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -371,6 +371,7 @@
                 "sha256:d3a27550a8185e53b244ad7e79e307594b92fede8617d80200a8cce1fba2c60f",
                 "sha256:f0e6b697a975d9d3ccd04135316c947dd82d841067c7800ccf622a8717e98df1"
             ],
+            "index": "pypi",
             "version": "==2.8.3"
         },
         "psycopg2-binary": {
@@ -461,10 +462,10 @@
         },
         "redis": {
             "hashes": [
-                "sha256:1f2493b72f669a096c59ca7cf7f4067b1ab58a0a3c6bef51d5d8fd384298c6a2",
-                "sha256:b851b0ef53b6d416f1dc692dc168f3d390b37995925bfe29351b3a869976598c"
+                "sha256:45682ecf226c7611efe731974c4fa3390170ba045b9cdb26f0051114a5c2a68b",
+                "sha256:f2609a85e5f37f489ba3b5652e1175dc3711c4d7a7818c4f657615810afd23df"
             ],
-            "version": "==3.3.4"
+            "version": "==3.3.6"
         },
         "six": {
             "hashes": [
@@ -775,10 +776,10 @@
         },
         "pbr": {
             "hashes": [
-                "sha256:0ca44dc9fd3b04a22297c2a91082d8df2894862e8f4c86a49dac69eae9e85ca0",
-                "sha256:4aed6c1b1fa5020def0f22aed663d87b81bb3235f112490b07d2643d7a98c5b5"
+                "sha256:56e52299170b9492513c64be44736d27a512fa7e606f21942160b68ce510b4bc",
+                "sha256:9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
             ],
-            "version": "==5.4.1"
+            "version": "==5.4.2"
         },
         "pep8-naming": {
             "hashes": [
@@ -789,11 +790,11 @@
         },
         "pre-commit": {
             "hashes": [
-                "sha256:92e406d556190503630fd801958379861c94884693a032ba66629d0351fdccd4",
-                "sha256:cccc39051bc2457b0c0f7152a411f8e05e3ba2fe1a5613e4ee0833c1c1985ce3"
+                "sha256:704d9c48d7efb5bd36dcf8e8c3529fa95689b4f8b5c80b3fceab235ee2394ba1",
+                "sha256:8615bff705a56684462f9f0e8e1a22f3476bcdda0f204e77f70fbddb330ffeb4"
             ],
             "index": "pypi",
-            "version": "==1.17.0"
+            "version": "==1.18.0"
         },
         "prospector": {
             "extras": [
