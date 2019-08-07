@@ -82,7 +82,7 @@ baseConfig[1].entry = [
 ]
 
 baseConfig[1].output = {
-  path: path.resolve('./static/webpack_bundles/'),
+  path: path.resolve('./staticfiles/webpack_bundles/'),
   publicPath: '',
   filename: '[name]-[hash].js',
 }
