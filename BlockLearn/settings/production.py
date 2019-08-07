@@ -6,7 +6,7 @@ from .base import *  # noqa
 import django_heroku
 
 
-DEBUG = True
+DEBUG = False
 
 SECRET_KEY = '!qnwkc9xh^n$)(4gskq+1k0k3^luwam%rqr%lq(lku5&g#0$7n'
 
