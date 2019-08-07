@@ -82,7 +82,7 @@ baseConfig[1].entry = [
 ]
 
 baseConfig[1].output = {
-  path: path.resolve('./assets/webpack_bundles/'),
+  path: path.resolve('./static/webpack_bundles/'),
   publicPath: '',
   filename: '[name]-[hash].js',
 }
@@ -112,12 +112,12 @@ baseConfig[1].plugins = [
   }),
   new SpritesmithPlugin({
       src: {
-        cwd: path.resolve(__dirname, 'assets/images/'),
+        cwd: path.resolve(__dirname, 'static/images/'),
         glob: '*.png'
       },
       target: {
-        image: path.resolve(__dirname, 'assets/images/spritesmith-generated/sprite.png'),
-        css: path.resolve(__dirname, 'assets/sass/vendor/spritesmith.scss')
+        image: path.resolve(__dirname, 'static/images/spritesmith-generated/sprite.png'),
+        css: path.resolve(__dirname, 'static/sass/vendor/spritesmith.scss')
       },
       retina: '@2x'
   }),
