@@ -4,6 +4,7 @@
   "private": true,
   "description": "BlockLearn frontend assets.",
   "main": "index.js",
+  "homepage": "https://blocklearnxyz.herokuapp.com",
   "engines": {
     "node": "8.5.0"
   },
