@@ -110,7 +110,7 @@ class UserPanel extends Component {
         }*/
       }
       if(e.data === "goToCoding") {
-        this.props.history.push('/coding');
+        this.props.history.push('/experiential');
       }
     };
 
