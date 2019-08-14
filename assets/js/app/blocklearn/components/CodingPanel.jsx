@@ -272,11 +272,11 @@ class CodingPanel extends Component {
                         <div className="section__content section__content">
                             <div id="slide-deck-container">
                               {
-                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src="http://remix.ethereum.org">
+                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src="https://remix.ethereum.org">
                                     Your browser is not supported.
                                 </iframe> : (
                                 this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src="http://remix.ethereum.org" onLoad={(e) => this.iframeLoad(e)} >
+                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src="https://remix.ethereum.org" onLoad={(e) => this.iframeLoad(e)} >
                                       Your browser is not supported.
                                   </iframe>
                                 ))

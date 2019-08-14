@@ -82,8 +82,8 @@ baseConfig[1].entry = [
 ]
 
 baseConfig[1].output = {
-  path: path.resolve('./assets/webpack_bundles/'),
-  publicPath: '',
+  path: path.resolve('./staticfiles/webpack_bundles/'),
+  publicPath: 'https://blocklearnxyz.herokuapp.com/static/webpack_bundles/',
   filename: '[name]-[hash].js',
 }
 
@@ -112,12 +112,12 @@ baseConfig[1].plugins = [
   }),
   new SpritesmithPlugin({
       src: {
-        cwd: path.resolve(__dirname, 'assets/images/'),
+        cwd: path.resolve(__dirname, 'staticfiles/images/'),
         glob: '*.png'
       },
       target: {
-        image: path.resolve(__dirname, 'assets/images/spritesmith-generated/sprite.png'),
-        css: path.resolve(__dirname, 'assets/sass/vendor/spritesmith.scss')
+        image: path.resolve(__dirname, 'staticfiles/images/spritesmith-generated/sprite.png'),
+        css: path.resolve(__dirname, 'staticfiles/sass/vendor/spritesmith.scss')
       },
       retina: '@2x'
   }),
