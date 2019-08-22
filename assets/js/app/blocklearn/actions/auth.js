@@ -1,6 +1,7 @@
 export const loadUser = () => {
     return (dispatch, getState) => {
-        dispatch({type: "USER_LOADING"});
+        dispatch({type: "USER_LOADING"}); // TODO let's convert all the hardcoded strings into constants later.
+                                          //      so that we can catch errors caused by typos later
 
         const token = getState().auth.token;
 
@@ -28,9 +29,12 @@ export const loadUser = () => {
                     return res.data;
                 } else if (res.status >= 400 && res.status < 500) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
-                    throw res.data;
+                    throw res.data; // FIXME not a good idea to throw an unknown data (Usually an error should be thrown)
                 }
             })
+            .catch(err => {
+                dispatch({ type: "APPLICATION_ERROR", err });
+            });
     }
 }
 
