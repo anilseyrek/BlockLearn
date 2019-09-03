@@ -13,9 +13,11 @@ import CodingPanel from "./components/CodingPanel";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import EmbedCourse from "./components/EmbedCourse/EmbedCourse";
 
 
 let store = createStore(progressApp, applyMiddleware(thunk));
+
 
 class RootContainerComponent extends Component {
 
@@ -68,6 +70,7 @@ class RootContainerComponent extends Component {
                 <Switch>
                     <PrivateRoute exact path="/" component={UserPanel} />
                     <PrivateRoute exact path="/experiential" component={CodingPanel} />
+                    <PrivateRoute exact path="/courses/blockchain" component={EmbedCourse} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />
@@ -76,6 +79,9 @@ class RootContainerComponent extends Component {
         );
     }
 }
+
+
+const reload = () => window.location.reload();
 
 const mapStateToProps = state => {
     return {
