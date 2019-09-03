@@ -33,6 +33,30 @@ class UserPanel extends Component {
         this.state.isFetching = false;
         document.addEventListener('keydown', this.handleKeyPress);
         window.addEventListener('message', this.handleIframeChange);
+
+
+        var buffer = 20; //scroll bar buffer
+        var iframe = document.getElementById('slide-deck');
+
+        function pageY(elem) {
+            return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+        }
+
+        function resizeIframe() {
+            var height = document.documentElement.clientHeight;
+            height -= pageY(document.getElementById('slide-deck'))+ buffer ;
+            height = (height < 0) ? 0 : height;
+            document.getElementById('slide-deck').style.height = height + 'px';
+        }
+
+        // .onload doesn't work with IE8 and older.
+        if (iframe.attachEvent) {
+            iframe.attachEvent("onload", resizeIframe);
+        } else {
+            iframe.onload=resizeIframe;
+        }
+
+        window.onresize = resizeIframe;
     }
 
     componentWillUnmount(){
@@ -251,7 +275,7 @@ class UserPanel extends Component {
         const timeOn = false;
         let firstCourse = null;
         if (this.props.progress.length === 0) {
-          firstCourse = "/static/courses/blockchain.html";
+          firstCourse = "/static/courses/toplumsal-cinsiyet-citok.html";
         }
 
         return (
@@ -263,7 +287,7 @@ class UserPanel extends Component {
           <div className="page-container2">
 
                   <Header />
-                  <Breadcrumb courseName="Introduction to Blockchain" handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
+                  <Breadcrumb courseName="Toplumsal Cinsiyet Farkındalığı" handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
                   {
                     isFetching ? <div>Loading...</div> : (
                       <section className="statistic">

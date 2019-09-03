@@ -258,7 +258,8 @@ body {
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: #42affa;
+  /*color: #42affa; edit by anilseyrek */
+  color: #3EB233;
 height: 10px !important; }
 
 .reveal .progress span {
