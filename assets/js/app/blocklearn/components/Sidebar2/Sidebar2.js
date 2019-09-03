@@ -65,11 +65,9 @@ class Sidebar2 extends Component {
             </div>
             <div className="menu-sidebar2__content js-scrollbar1">
                 <div className="account2">
-                    /*
                     <div className="image img-cir img-120">
                         <img src={"/static/images/icon/avatar.svg"} alt="Profile Avatar" />
                     </div>
-                    */
                     <h4 className="name">{this.props.user.username}</h4>
                     <a href="#" onClick={(e) => this.onClickSignOut(e)} >Sign out</a>
                 </div>
