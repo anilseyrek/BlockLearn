@@ -13,6 +13,7 @@ __pycache__/
 /staticfiles/js/*
 /staticfiles/rest_framework/*
 /staticfiles/vendor/*
+static/*
 
 # coverage result
 .coverage
