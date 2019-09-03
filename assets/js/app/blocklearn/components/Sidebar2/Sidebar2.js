@@ -67,7 +67,7 @@ class Sidebar2 extends Component {
                 <div className="account2">
                     /*
                     <div className="image img-cir img-120">
-                        <img src={"/static/images/icon/1.jpg"} alt="Anıl Seyrek" />
+                        <img src={"/static/images/icon/avatar.svg"} alt="Profile Avatar" />
                     </div>
                     */
                     <h4 className="name">{this.props.user.username}</h4>
