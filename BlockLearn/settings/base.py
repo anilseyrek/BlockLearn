@@ -100,6 +100,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = (
+    base_dir_join('assets'),
+    base_dir_join('staticfiles'),
+)
 
 # Webpack
 WEBPACK_LOADER = {
