@@ -7,8 +7,7 @@ module.exports = [{
     './assets/js/jquery-index.js',
   ],
   output: {
-    path: path.resolve('./staticfiles/webpack_bundles/'),
-    publicPath: 'https://blocklearnxyz.herokuapp.com/static/webpack_bundles/',
+    path: path.resolve('./assets/webpack_bundles/'),
     filename: 'bundle-jquery.js',
   },
   module: {
