@@ -3,7 +3,6 @@
 .DS_Store
 /package-lock.json
 */settings/local.py
-/staticfiles/*
 /mediafiles/*
 __pycache__/
 /staticfiles/admin/*
