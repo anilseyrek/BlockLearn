@@ -18,6 +18,11 @@ SECRET_KEY = '!qnwkc9xh^n$)(4gskq+1k0k3^luwam%rqr%lq(lku5&g#0$7n'
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
+STATICFILES_DIRS = (
+    base_dir_join('assets'),
+    base_dir_join('staticfiles'),
+)
+
 STATIC_ROOT = base_dir_join('static')
 STATIC_URL = '/static/'
 
