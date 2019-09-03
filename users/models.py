@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User #AbstractBaseUser, PermissionsMixin
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from common.models import IndexedTimeStampedModel
@@ -31,6 +32,29 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     def __str__(self):
         return self.email
         '''
+
+
+class UserProfile(models.Model):
+    """
+    Class to define external properties of a user.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True)
+
+
+    def __str__(self):
+        return self.user.__str__()
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    """
+    Signal listener for User model. Triggers after a user is created.
+    """
+    if created:
+        UserProfile.objects.create(user=instance)
+
+# Connects the signal listener to the user.
+post_save.connect(create_user_profile, sender=User)
 
 class Progress(models.Model):
     course_URL = models.CharField(max_length=255, default="/static/courses/blockchain.html")

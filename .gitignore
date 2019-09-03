@@ -22,6 +22,9 @@ static/*
 # pycharm
 .idea
 
+# vscode
+.vscode
+
 # data
 *.dump
 

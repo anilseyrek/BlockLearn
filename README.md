@@ -18,8 +18,6 @@
 - Open another command line window and go to the project's directory.
 - `PIP_NO_CACHE_DIR=off pipenv shell`
 - `PIP_NO_CACHE_DIR=off pipenv install --dev`
-- `PIP_NO_CACHE_DIR=off pipenv install djangorestframework`
-- `PIP_NO_CACHE_DIR=off pipenv install django-rest-knox`
 - Run the migrations:  
   `python manage.py migrate`
 - `python manage.py runserver`

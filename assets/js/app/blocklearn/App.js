@@ -67,7 +67,7 @@ class RootContainerComponent extends Component {
             <BrowserRouter>
                 <Switch>
                     <PrivateRoute exact path="/" component={UserPanel} />
-                    <PrivateRoute exact path="/coding" component={CodingPanel} />
+                    <PrivateRoute exact path="/experiential" component={CodingPanel} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />

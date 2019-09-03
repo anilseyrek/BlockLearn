@@ -81,8 +81,8 @@ baseConfig[1].entry = [
 
 baseConfig[0].output['publicPath'] = 'http://localhost:3000/assets/bundles/';
 baseConfig[1].output = {
-  path: path.resolve('./assets/bundles/'),
-  publicPath: 'http://localhost:3000/assets/bundles/',
+  path: path.resolve('./assets/webpack_bundles/'),
+  publicPath: 'http://localhost:3000/assets/webpack_bundles/',
   filename: '[name].js',
 }
 
