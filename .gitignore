@@ -5,15 +5,7 @@
 */settings/local.py
 /mediafiles/*
 __pycache__/
-/staticfiles/admin/*
-/staticfiles/css/*
-/staticfiles/debug_toolbar/*
-/staticfiles/fonts/*
-/staticfiles/import_export/*
-/staticfiles/js/*
-/staticfiles/rest_framework/*
-/staticfiles/vendor/*
-static/*
+/staticfiles/*
 
 # coverage result
 .coverage

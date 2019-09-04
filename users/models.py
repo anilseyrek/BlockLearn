@@ -46,15 +46,15 @@ class UserProfile(models.Model):
         return self.user.__str__()
 
 
-# def create_user_profile(sender, instance, created, **kwargs):
+def create_user_profile(sender, instance, created, **kwargs):
     """
     Signal listener for User model. Triggers after a user is created.
     """
-#    if created:
-#        UserProfile.objects.create(user=instance)
+    if created:
+        UserProfile.objects.create(user=instance)
 
 # Connects the signal listener to the user.
-# post_save.connect(create_user_profile, sender=User)
+post_save.connect(create_user_profile, sender=User)
 
 class Progress(models.Model):
     course_URL = models.CharField(max_length=255, default="/static/courses/blockchain.html")
@@ -66,4 +66,4 @@ class Progress(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.progress
+        return self.progress_number
