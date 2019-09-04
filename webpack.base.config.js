@@ -7,7 +7,7 @@ module.exports = [{
     './assets/js/jquery-index.js',
   ],
   output: {
-    path: path.resolve('./assets/webpack_bundles/'),
+    path: path.resolve('./assets/bundles/'),
     filename: 'bundle-jquery.js',
   },
   module: {
