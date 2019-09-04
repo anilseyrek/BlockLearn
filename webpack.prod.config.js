@@ -81,7 +81,7 @@ baseConfig[1].entry = [
 
 ]
 
-baseConfig[1].output = {
+baseConfig[0].output = {
   path: path.resolve('./staticfiles/bundles/'),
   publicPath: 'https://blocklearnxyz.herokuapp.com/static/bundles/',
 }
