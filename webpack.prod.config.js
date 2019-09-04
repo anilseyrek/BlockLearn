@@ -81,10 +81,10 @@ baseConfig[1].entry = [
 
 ]
 
-baseConfig[0].output['publicPath'] = 'https://blocklearnxyz.herokuapp.com/assets/bundles/';
+//baseConfig[0].output['publicPath'] = 'https://blocklearnxyz.herokuapp.com/assets/bundles/';
 baseConfig[1].output = {
   path: path.resolve('./assets/webpack_bundles/'),
-  publicPath: 'https://blocklearnxyz.herokuapp.com/static/webpack_bundles/',
+  publicPath: '',
   filename: '[name]-[hash].js',
 }
 
