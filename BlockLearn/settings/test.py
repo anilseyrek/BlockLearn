@@ -10,7 +10,7 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = base_dir_join('static')
+STATIC_ROOT = base_dir_join('staticfiles')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = base_dir_join('mediafiles')
