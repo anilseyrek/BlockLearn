@@ -65,4 +65,4 @@ class Progress(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.progress
+        return self.progress_number
