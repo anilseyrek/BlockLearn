@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "857f601c3b3be1667b49561d5ae2218cc5ef75417630fff30907569c31596853"
+            "sha256": "605eb15e4ce1089cdd4462455270228d860312bd085cb716195b1ddf5aad25f1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -186,6 +186,14 @@
             ],
             "index": "pypi",
             "version": "==2.2.4"
+        },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
         },
         "django-import-export": {
             "hashes": [
@@ -462,10 +470,10 @@
         },
         "redis": {
             "hashes": [
-                "sha256:0607faf60d44768e17f65e506fe390679b54be6fd6d5f0c2d28f3ebf4f0535e7",
-                "sha256:9c96c5bf11a8c47eb33cefdefd41c47cf1ff68db41c51b56b3ec7938b7c627f7"
+                "sha256:45682ecf226c7611efe731974c4fa3390170ba045b9cdb26f0051114a5c2a68b",
+                "sha256:f2609a85e5f37f489ba3b5652e1175dc3711c4d7a7818c4f657615810afd23df"
             ],
-            "version": "==3.3.7"
+            "version": "==3.3.6"
         },
         "six": {
             "hashes": [
@@ -810,11 +818,11 @@
         },
         "pre-commit": {
             "hashes": [
-                "sha256:0767b235f8efafcefd7a6e4dbcf80b47d7e9c1ab8a4c07bca0635261516fb43a",
-                "sha256:1762f2a551732e250d0e16131d3bf9e653adb6ec262e58dfe033906750503235"
+                "sha256:704d9c48d7efb5bd36dcf8e8c3529fa95689b4f8b5c80b3fceab235ee2394ba1",
+                "sha256:8615bff705a56684462f9f0e8e1a22f3476bcdda0f204e77f70fbddb330ffeb4"
             ],
             "index": "pypi",
-            "version": "==1.18.1"
+            "version": "==1.18.0"
         },
         "prospector": {
             "extras": [

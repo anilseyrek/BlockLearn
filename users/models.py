@@ -33,7 +33,6 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
         return self.email
         '''
 
-
 class UserProfile(models.Model):
     """
     Class to define external properties of a user.

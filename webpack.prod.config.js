@@ -116,12 +116,12 @@ baseConfig[1].plugins = [
   }),
   new SpritesmithPlugin({
       src: {
-        cwd: path.resolve(__dirname, 'staticfiles/images/'),
+        cwd: path.resolve(__dirname, 'assets/images/'),
         glob: '*.png'
       },
       target: {
-        image: path.resolve(__dirname, 'staticfiles/images/spritesmith-generated/sprite.png'),
-        css: path.resolve(__dirname, 'staticfiles/sass/vendor/spritesmith.scss')
+        image: path.resolve(__dirname, 'assets/images/spritesmith-generated/sprite.png'),
+        css: path.resolve(__dirname, 'assets/sass/vendor/spritesmith.scss')
       },
       retina: '@2x'
   }),

@@ -1,19 +1,22 @@
 from decouple import Csv, config
-from dj_database_url import parse as db_url
+#from dj_database_url import parse as db_url
+import dj_database_url
 
 from .base import *  # noqa
+import django_heroku
 
 
 DEBUG = False
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = '!qnwkc9xh^n$)(4gskq+1k0k3^luwam%rqr%lq(lku5&g#0$7n'
 
-DATABASES = {
-    'default': config('DATABASE_URL', cast=db_url),
-}
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+#DATABASES = {'default' : dj_database_url.config(default=os.environ["postgres://cvmfapzkjvbiwx:0caeaa9119af2d011666e76facd90d378e7c98edd7ff6f6b441a4b1715e9ae8a@ec2-54-228-246-214.eu-west-1.compute.amazonaws.com:5432/d5o940hvr74itq"]) }
+#DATABASES = {
+#    'default': config('DATABASE_URL', cast=db_url),
+#}
+#DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 STATIC_ROOT = base_dir_join('staticfiles')
 STATIC_URL = '/static/'
@@ -21,11 +24,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = base_dir_join('mediafiles')
 MEDIA_URL = '/media/'
 
-SERVER_EMAIL = 'blocklearn@innovative.team'
+SERVER_EMAIL = config('SENDGRID_USERNAME')
 
-EMAIL_HOST = 'mail.innovative.team'
-EMAIL_HOST_USER = config('blocklearn@innovative.team')
-EMAIL_HOST_PASSWORD = config('block2018learn')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = config('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = config('SENDGRID_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -117,3 +120,6 @@ LOGGING = {
 }
 
 JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

@@ -33,6 +33,30 @@ class UserPanel extends Component {
         this.state.isFetching = false;
         document.addEventListener('keydown', this.handleKeyPress);
         window.addEventListener('message', this.handleIframeChange);
+
+
+        var buffer = 20; //scroll bar buffer
+        var iframe = document.getElementById('slide-deck');
+
+        function pageY(elem) {
+            return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+        }
+
+        function resizeIframe() {
+            var height = document.documentElement.clientHeight;
+            height -= pageY(document.getElementById('slide-deck'))+ buffer ;
+            height = (height < 0) ? 0 : height;
+            document.getElementById('slide-deck').style.height = height + 'px';
+        }
+
+        // .onload doesn't work with IE8 and older.
+        if (iframe.attachEvent) {
+            iframe.attachEvent("onload", resizeIframe);
+        } else {
+            iframe.onload=resizeIframe;
+        }
+
+        window.onresize = resizeIframe;
     }
 
     componentWillUnmount(){
