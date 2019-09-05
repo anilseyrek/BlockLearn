@@ -25,6 +25,8 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" integrity="sha384-rtJEYb85SiYWgfpCr0jn174XgJTn4rptSOQsMroFBPQSGLdOC5IbubP6lJ35qoM9" crossorigin="anonymous">
+
 		<script src="js/intro.js"></script>
 
 		<!-- Printing and PDF exports -->
@@ -82,46 +84,28 @@
 					</section>
 				</section>
 
-				<section data-state="exploration1">
-					<h6><small>Exploration 1</small></h6>
-					<iframe id="exploration1" class="stretch" data-src="https://www.oppia.org/embed/exploration/gXw1lU4ulUvL/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-1"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/86PkXm8L1y8K">
 				</section>
 
-				<section data-state="exploration2">
-					<h6><small>Exploration 2</small></h6>
-					<iframe id="exploration2" class="stretch" data-src="https://www.oppia.org/embed/exploration/c6ntv0G-TTU2/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-2"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/S700aBJhLybe">
 				</section>
 
-				<section data-state="exploration3">
-					<h6><small>Exploration 3</small></h6>
-					<iframe id="exploration3" class="stretch" data-src="https://www.oppia.org/embed/exploration/jL0ysYZcPFzx/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-3"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/Q5ThmoiPk1AC">
 				</section>
 
-				<section data-state="exploration4">
-					<h6><small>Exploration 4</small></h6>
-					<iframe id="exploration4" class="stretch" data-src="https://www.oppia.org/embed/exploration/YznEuTQW7pzI/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-4"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/aAfzmHZpbGVN">
 				</section>
 
-				<section data-state="exploration5">
-					<h6><small>Exploration 5</small></h6>
-					<iframe id="exploration5" class="stretch" data-src="https://www.oppia.org/embed/exploration/CO3ochPWxCzM/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-5"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/gsXvBqW8tFdo">
 				</section>
 
-				<section data-state="exploration6">
-					<h6><small>Exploration 6</small></h6>
-					<iframe id="exploration6" class="stretch" data-src="https://www.oppia.org/embed/exploration/I2gglbqDFXbB/" width="572px" height="330px" >
-					</iframe>
-
+				<section class="fig-container" data-state="exploration-5"
+         data-file="https://bl-oppia.appspot.com/embed/exploration/pOV5j7yd0vdQ">
 				</section>
 
 				<section data-state="extend">
@@ -150,14 +134,20 @@
 				</section>
 
 				<section data-state="blockchaindemo">
-					<h6><small>Simple Blockchain Demo</small></h6>
-					<iframe id="blockchaindemo" class="stretch" data-src="https://blockchaindemo.io/" width="572px" height="330px" >
-					</iframe>
+					<section>
+						<h2>Simple Blockchain Demo</h2>
+						<p>
+							Now you can understand how blockchain works with a demo. Go down and explore!
+						</p>
+						<p><small>powered with <u>blockchaindemo.io</u></small></p>
+						<h1><a href="#" class="navigate-down enabled">
+							<i class="far fa-arrow-alt-circle-down"></i>
+						</a></h1>
+					</section>
+					<section class="fig-container" data-state="exploration-5"
+	         data-file="https://blockchaindemo.io/">
+					</section>
 
-				</section>
-
-				<section class="fig-container"
-         data-file="https://blockchaindemo.io/">
 				</section>
 
 
@@ -202,16 +192,13 @@
 		</script>
 
 		<script>
-
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
 				progress: true,
 				history: true,
 				center: true,
-
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -253,13 +240,11 @@
 				}
 				*/
 			} );
-
 		</script>
 
 		<script type="text/javascript">
 			function startIntroJS(step){
 				var intro = introJs();
-
 				 intro.setOptions({
 					 showStepNumbers:false,
 					 showBullets:false,
@@ -267,15 +252,12 @@
 					 nextLabel: "",
 					 prevLabel: ""
 				 });
-
 				intro.start().goToStepNumber(step);
 				//Remove effects of intro.js, transforming the slides
 				var styleTransform = document.getElementById("slides-view").style.transform;
 				document.getElementById("slides-view").style.setProperty('transform',styleTransform,'important');
 					//introJs().setOption('showStepNumbers', 'false');
-
 			}
-
 			function startEndIntroJS(step){
 				var intro = introJs();
 				if(step > 1){
@@ -290,8 +272,6 @@
 				intro.exit();
 				 startIntroJS(step);
 			}
-
-
 			function addHints(){
         intro = introJs();
           intro.setOptions({
@@ -313,25 +293,21 @@
               }
             ]
           });
-
           intro.onhintsadded(function() {
               console.log('all hints added');
           });
-
           intro.onhintclick(function(hintElement, item, stepId) {
               console.log('hint clicked', hintElement, item, stepId);
           });
-
           intro.onhintclose(function (stepId) {
               console.log('hint closed', stepId);
           });
-
           intro.addHints();
 					var styleTransform = document.getElementById("slides-view").style.transform;
 					document.getElementById("slides-view").style.setProperty('transform',styleTransform,'important');
       }
-
 		</script>
 
 	</body>
 </html>
+
