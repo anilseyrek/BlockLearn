@@ -5,6 +5,7 @@
 */settings/local.py
 /mediafiles/*
 __pycache__/
+/staticfiles/*
 
 # coverage result
 .coverage
