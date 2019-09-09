@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Blockchain Introduction</title>
+
+		<meta name="description" content="Introduction Course">
+		<meta name="author" content="BlockLearn">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/introjs.min.css">
+  	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
+  	<link rel="stylesheet" type="text/css" href="css/multi-select.css">
+		<!--<link rel="stylesheet" href="css/ex.css" type="text/css">-->
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script src="js/intro.js"></script>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides" id="slides-view">
+			
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script type="text/javascript" src="js/reveal.js"></script>
+
+		<script>
+			function getQuizResult(num){
+				var iframe = document.getElementById('quiz'+num);
+				var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+				return innerDoc.querySelector('.score').innerHTML;
+			}
+			function getChapterResult(num){
+				var iframe = document.getElementById('chapter'+num);
+				var innerDoc = /*iframe.contentDocument ||*/ iframe.contentWindow.document;
+				return innerDoc.querySelector('.protractor-test-conversation-content').innerHTML;
+			}
+			function goToSlide(num){
+				Reveal.slide(num);
+			}
+			function submitSelection() {
+				var iframe = document.getElementById('selection-quiz');
+				var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+				console.log(innerDoc.getElementById('pre-selected-options').selectedOptions);
+				goToSlide(5);
+			}
+			function goToCoding(){
+				parent.postMessage("goToCoding");
+			}
+		</script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/reveald3/reveald3.js' }
+				]
+			});
+			parent.postMessage("Reveal_Initialized");
+			Reveal.addEventListener( 'afterquiz1', function() {
+				var quizResult = getQuizResult(1);
+				if(parseInt(quizResult.substring(0, quizResult.length-1), 10) < 50){
+					console.log("less than 50");
+					//goToSlide(2);
+					//event.previousSlide;
+					var indices = Reveal.getIndices( document.getElementById( 'explore1' ) );
+					Reveal.slide( indices.h, indices.v );
+				}
+			} );
+			Reveal.addEventListener( 'slidechanged', function() {
+				//var element = document.querySelector('navigate-right'); // grab a reference to your element
+				//element.addEventListener('click', getChapterResult(1));
+				//document.domain = "oppia.org"
+				//var chapterResult = getChapterResult(1);
+				//console.log("exploration1");
+				parent.postMessage('slidechanged');
+				//document.domain = ""
+/*
+				if(parseInt(quizResult.substring(0, quizResult.length-1), 10) < 50){
+					console.log("less than 50");
+					//goToSlide(2);
+					//event.previousSlide;
+					var indices = Reveal.getIndices( document.getElementById( 'explore1' ) );
+					Reveal.slide( indices.h, indices.v );
+				}
+				*/
+			} );
+
+		</script>
+
+		<script type="text/javascript">
+			function startIntroJS(step){
+				var intro = introJs();
+
+				 intro.setOptions({
+					 showStepNumbers:false,
+					 showBullets:false,
+					 overlayOpacity: 0.7,
+					 nextLabel: "",
+					 prevLabel: ""
+				 });
+
+				intro.start().goToStepNumber(step);
+				//Remove effects of intro.js, transforming the slides
+				var styleTransform = document.getElementById("slides-view").style.transform;
+				document.getElementById("slides-view").style.setProperty('transform',styleTransform,'important');
+					//introJs().setOption('showStepNumbers', 'false');
+
+			}
+
+			function startEndIntroJS(step){
+				var intro = introJs();
+				if(step > 1){
+					intro.start().goToStepNumber(step);
+				}
+				else{
+					intro.start();
+				}
+				var styleTransform = document.getElementById("slides-view").style.transform;
+				document.getElementById("slides-view").style.setProperty('transform',styleTransform,'important');
+				//document.querySelector(".introjs-skipbutton .introjs-donebutton").click();
+				intro.exit();
+				 startIntroJS(step);
+			}
+
+
+			function addHints(){
+        intro = introJs();
+          intro.setOptions({
+            hints: [
+              {
+                element: document.querySelector('#step1'),
+                hint: "This is a tooltip.",
+                hintPosition: 'top-middle'
+              },
+              {
+                element: '#step2',
+                hint: 'More features, more fun.',
+                position: 'left'
+              },
+              {
+                element: '#step4',
+                hint: "<b>Another</b> step.",
+                hintPosition: 'top-middle'
+              }
+            ]
+          });
+
+          intro.onhintsadded(function() {
+              console.log('all hints added');
+          });
+
+          intro.onhintclick(function(hintElement, item, stepId) {
+              console.log('hint clicked', hintElement, item, stepId);
+          });
+
+          intro.onhintclose(function (stepId) {
+              console.log('hint closed', stepId);
+          });
+
+          intro.addHints();
+					var styleTransform = document.getElementById("slides-view").style.transform;
+					document.getElementById("slides-view").style.setProperty('transform',styleTransform,'important');
+      }
+
+		</script>
+
+	</body>
+</html>

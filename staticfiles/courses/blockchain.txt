@@ -1,0 +1,125 @@
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides" id="slides-view">
+				<section data-background-image="/static/courses/images/blockchain-basics/bc-bg.jpeg" data-state="dimbg">
+					<h1>Blockchain 101</h1>
+					<p>
+						<small>Created by <a href="http://blocklearn.xyz">BlockLearn</a><br></small>
+					</p>
+					<p>
+						Press your space key to start!
+					</p>
+				</section>
+				<section>
+					<h1>Blockchain Basics</h1>
+					<p>
+						Continue (Press your space key to start!)
+						<!--<small><a onclick="introJs().start()">deneme</A></small>-->
+					</p>
+				</section>
+
+				<section data-background="#dddddd" data-background-transition="zoom">
+					<section>
+						<h2>Let's start!</h2>
+						<p>
+							But first, show me what you know about blockchain?<br><br>
+							<small>Press space key again!</small>
+						</p>
+						<p>
+					</section>
+					<section>
+						<h4>Choose the words you already know:</h4>
+						<p><small>Be honest, it's a little help for me to teach you better. :)</small></p>
+						<iframe id="selection-quiz" data-src="./selection-quiz.html" width="372px" height="230px"></iframe><br>
+						<button class="au-btn--submit" onclick="submitSelection()">Submit</button>
+					</section>
+				</section>
+
+				<section data-state="exploration1">
+					<h6><small>Exploration 1</small></h6>
+					<iframe id="exploration1" class="stretch" data-src="https://www.oppia.org/embed/exploration/gXw1lU4ulUvL/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="exploration2">
+					<h6><small>Exploration 2</small></h6>
+					<iframe id="exploration2" class="stretch" data-src="https://www.oppia.org/embed/exploration/c6ntv0G-TTU2/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="exploration3">
+					<h6><small>Exploration 3</small></h6>
+					<iframe id="exploration3" class="stretch" data-src="https://www.oppia.org/embed/exploration/jL0ysYZcPFzx/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="exploration4">
+					<h6><small>Exploration 4</small></h6>
+					<iframe id="exploration4" class="stretch" data-src="https://www.oppia.org/embed/exploration/YznEuTQW7pzI/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="exploration5">
+					<h6><small>Exploration 5</small></h6>
+					<iframe id="exploration5" class="stretch" data-src="https://www.oppia.org/embed/exploration/CO3ochPWxCzM/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="exploration6">
+					<h6><small>Exploration 6</small></h6>
+					<iframe id="exploration6" class="stretch" data-src="https://www.oppia.org/embed/exploration/I2gglbqDFXbB/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section data-state="extend">
+					<section>
+						<h2>Extend Your Knowledge!</h2>
+						<p>
+							Use the given resources if you want to learn more.
+						</p>
+					</section>
+					<section>
+							<h6>Readings</h6>
+							<p>
+								<a href="https://bitcoin.org/bitcoin.pdf" target="_blank">Bitcoin Paper</a> <br>
+								<a href="https://www2.deloitte.com/content/dam/Deloitte/cz/Documents/financial-services/cz-2018-deloitte-global-blockchain-survey.pdf"  target="_blank">Deloitte’s 2018 global blockchain survey</a> <br>
+								<a href="https://github.com/ethereum/wiki/wiki/White-Paper" target="_blank">Ethereum White Paper</a> <br>
+								<a href="https://ethereum.github.io/yellowpaper/paper.pdf" target="_blank">Ethereum Yellow Paper</a>
+							</p>
+					</section>
+					<section>
+							<h6>Videos</h6>
+							<p>
+								<a href="https://www.youtube.com/watch?v=SSo_EIwHSd4" target="_blank">How does a blockchain work - Simply Explained</a> <br>
+								<a href="https://www.youtube.com/watch?v=hYip_Vuv8J0" target="_blank">Blockchain Expert Explains One Concept in 5 Levels of Difficulty | WIRED</a>
+							</p>
+					</section>
+				</section>
+
+				<section data-state="blockchaindemo">
+					<h6><small>Simple Blockchain Demo</small></h6>
+					<iframe id="blockchaindemo" class="stretch" data-src="https://blockchaindemo.io/" width="572px" height="330px" >
+					</iframe>
+
+				</section>
+
+				<section class="fig-container"
+         data-file="https://blockchaindemo.io/">
+				</section>
+
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						Continue with simple Solidity programming course:<br>
+						<button class="au-btn--submit" onclick="goToCoding()"> Smart Contract Development </button>
+					</p>
+				</section>
+
+			</div>
