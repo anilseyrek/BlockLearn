@@ -65,7 +65,11 @@ export const login = (username, password) => {
                 } else if (res.status === 403 || res.status === 401) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
                     throw res.data;
-                } else {
+                } else if (res.data.non_field_errors["0"] == "Email activation required!"){
+                      dispatch({type: "ACTIVATION_REQUIRED", data: res.data});
+                      throw res.data;
+                }
+                else {
                     dispatch({type: "LOGIN_FAILED", data: res.data});
                     throw res.data;
                 }

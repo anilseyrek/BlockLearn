@@ -80,8 +80,35 @@ class UserPanel extends Component {
         progressSaved: progressSavedState
       })
     }
+    resizeIframe = () => {
+      var buffer = 20; //scroll bar buffer
+      var iframe = document.getElementById('slide-deck');
+
+      function pageY(elem) {
+          return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+      }
+
+      function resize() {
+          var height = document.documentElement.clientHeight;
+          height -= pageY(document.getElementById('slide-deck'))+ buffer ;
+          height = (height < 0) ? 0 : height;
+          document.getElementById('slide-deck').style.height = height + 'px';
+      }
+
+      // .onload doesn't work with IE8 and older.
+      if (iframe.attachEvent) {
+          iframe.attachEvent("onload", resize);
+      } else {
+          iframe.onload=resize;
+      }
+
+      window.onresize = resize;
+
+    }
     handleIframeChange = (e) => {
       if (e.data === "slidechanged" || e.data === "Reveal_Initialized") {
+
+        this.resizeIframe();
 
         var courseURL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
 
