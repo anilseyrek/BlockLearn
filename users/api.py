@@ -1,7 +1,12 @@
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
-
 from knox.models import AuthToken
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .token_generator import account_activation_token
+from django.core.mail import send_mail
 
 from .models import Progress
 from .serializers import ProgressSerializer, CreateUserSerializer, UserSerializer, LoginUserSerializer
@@ -23,6 +28,20 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+
+        # Send confirmation mail
+        current_site = get_current_site(request)
+        email_subject = 'Activate Your Account'
+        to_email = user.email
+
+        message = render_to_string('activate_account.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+        })
+        send_mail(email_subject, message, 'no-reply@blocklearn.xyz', [to_email], fail_silently=False)
+
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]

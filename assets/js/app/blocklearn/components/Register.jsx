@@ -5,19 +5,39 @@ import {Link, Redirect} from "react-router-dom";
 
 import {auth} from "../actions";
 
+import Modal from 'react-modal';
+Modal.setAppElement('#alert-modal');
+
 class Login extends Component {
 
-    state = {
+    constructor() {
+      super();
+
+      this.state = {
+        modalIsOpen: false,
         first_name: "",
         last_name: "",
         username: "",
         email: "",
         password: "",
+      };
+
+      this.openModal = this.openModal.bind(this);
+      this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() {
+      this.setState({modalIsOpen: true});
+    }
+
+    closeModal() {
+      this.setState({modalIsOpen: false});
     }
 
     onSubmit = e => {
         e.preventDefault();
         this.props.register(this.state.first_name, this.state.last_name, this.state.username, this.state.email, this.state.password);
+        this.openModal();
     }
 
     render() {
@@ -70,6 +90,34 @@ class Login extends Component {
                                           <Link to="/login">Login</Link>
                                       </p>
                                   </div>
+
+                                  <Modal
+                                    isOpen={this.state.modalIsOpen}
+                                    onAfterOpen={this.afterOpenModal}
+                                    onRequestClose={this.closeModal}
+                                    contentLabel="Login Modal"
+                                    className="modal-open fade show "
+                                    id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true"
+                                  >
+                                    <div className="modal-dialog modal-sm" role="document">
+                                      <div className="modal-content">
+                                        <div className="modal-header">
+                                          <h5 className="modal-title" id="mediumModalLabel">Account Activation</h5>
+                                          <button onClick={this.closeModal} type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div className="modal-body">
+                                          <p>
+                                            Check your email and activate your account!
+                                          </p>
+                                        </div>
+                                        <div className="modal-footer">
+                                          <button onClick={this.closeModal} type="button" className="au-btn au-btn--block au-btn--green m-b-10">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Modal>
                               </div>
                           </div>
                       </div>

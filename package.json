@@ -42,6 +42,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.3.1",
+    "react-modal": "^3.10.1",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-timecode": "^1.1.16",
