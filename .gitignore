@@ -5,7 +5,7 @@
 */settings/local.py
 /mediafiles/*
 __pycache__/
-/staticfiles/js*
+/staticfiles/js/*
 
 # coverage result
 .coverage
