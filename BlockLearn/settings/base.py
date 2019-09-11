@@ -26,6 +26,8 @@ ADMINS = (
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,6 +74,10 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_DIRS = (
+    base_dir_join('templates'),
+)
 
 WSGI_APPLICATION = 'BlockLearn.wsgi.application'
 
