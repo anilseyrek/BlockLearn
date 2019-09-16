@@ -60,6 +60,7 @@ class Progress(models.Model):
     course_name = models.CharField(max_length=255, default="Blockchain 101")
     course_code = models.CharField(max_length=255, default="BC-101")
     progress_number = models.CharField(max_length=255, default="0")
+    last_reached_progress = models.CharField(max_length=255, default="0")
     owner = models.ForeignKey(User, related_name="progress",
                               on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

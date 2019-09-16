@@ -3,6 +3,12 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import User
+from common.models import Course
+
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('id', 'course_URL', 'course_name', 'course_code')
+
+admin.site.register(Course, CourseAdmin)
 
 '''
 class CustomUserAdmin(UserAdmin):

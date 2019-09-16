@@ -31,7 +31,7 @@ class RegistrationAPI(generics.GenericAPIView):
 
         # Send confirmation mail
         current_site = get_current_site(request)
-        email_subject = 'Activate Your Account'
+        email_subject = 'BlockLearn | Activate Your Account'
         to_email = user.email
 
         message = render_to_string('activate_account.html', {

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Sidebar2 from './Sidebar2';
 import Breadcrumb from './Breadcrumb'
 import PerfectScrollbar from 'perfect-scrollbar';
 import Timer from 'react-timer-wrapper';
@@ -56,6 +55,7 @@ class CodingPanel extends Component {
         course_code: "",
         course_name: "",
         progress_number: "",
+        last_reached_progress: "",
         updateProgressId: null,
     }
 
@@ -227,20 +227,20 @@ class CodingPanel extends Component {
     }
 
     resetForm = () => {
-        this.setState({course_URL: "", progress_number: "", updateProgressId: null});
+        this.setState({course_URL: "", progress_number: "", last_reached_progress: "", updateProgressId: null});
     }
 
     selectForEdit = (id) => {
         let progress = this.props.progress[id];
-        this.setState({course_URL: progress.course_URL, progress_number: progress.progress_number, updateProgressId: id});
+        this.setState({course_URL: progress.course_URL, progress_number: progress.progress_number, last_reached_progress: progress.last_reached_progress, updateProgressId: id});
     }
 
     submitProgress = (e) => {
         e.preventDefault();
         if (this.state.updateProgressId === null) {
-            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm)
+            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number, this.state.last_reached_progress).then(this.resetForm)
         } else {
-            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm);
+            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number, this.state.last_reached_progress).then(this.resetForm);
         }
     }
 
@@ -260,7 +260,7 @@ class CodingPanel extends Component {
 
           <div>
           <div className="page-wrapper">
-              <Sidebar2 timerOn={this.state.timerOn} contentActive={this.state.contentActive}/>
+              <Sidebar timerOn={this.state.timerOn} contentActive={this.state.contentActive}/>
           </div>
           <div className="page-container2">
 
@@ -306,11 +306,11 @@ const mapDispatchToProps = dispatch => {
         fetchProgress: () => {
             dispatch(progress.fetchProgress());
         },
-        addProgress: (course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number));
+        addProgress: (course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number, last_reached_progress));
         },
-        updateProgress: (id, course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number));
+        updateProgress: (id, course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.updateProgress(id, course_URL, course_name, course_code, progress_number, last_reached_progress));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));

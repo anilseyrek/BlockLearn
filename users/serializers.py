@@ -31,7 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Progress
-        fields = ('id', 'course_URL', 'course_name', 'course_code', 'progress_number', )
+        fields = ('id', 'course_URL', 'course_name', 'course_code', 'progress_number', 'last_reached_progress', )
 
 class LoginUserSerializer(serializers.Serializer):
     username = serializers.CharField()

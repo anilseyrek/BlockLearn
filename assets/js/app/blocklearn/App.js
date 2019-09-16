@@ -10,6 +10,8 @@ import progressApp from "./reducers";
 
 import UserPanel from "./components/UserPanel";
 import CodingPanel from "./components/CodingPanel";
+import ConceptualLearningModule from "./components/ConceptualLearningModule";
+import ConceptPage from "./components/ConceptPage"
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -49,7 +51,7 @@ class RootContainerComponent extends Component {
       });
     }
 */
-    PrivateRoute = ({component: ChildComponent, rest}) => {
+    PrivateRoute = ({component: ChildComponent, ...rest}) => {
         return <Route {...rest} render={props => {
             if (this.props.auth.isLoading) {
                 return <em>Loading...</em>;
@@ -68,6 +70,7 @@ class RootContainerComponent extends Component {
                 <Switch>
                     <PrivateRoute exact path="/" component={UserPanel} />
                     <PrivateRoute exact path="/experiential" component={CodingPanel} />
+                    <PrivateRoute exact path="/conceptual/:courseCode" component={ConceptualLearningModule} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />
