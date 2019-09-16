@@ -9,11 +9,6 @@ from .token_generator import account_activation_token
 
 # Create your views here.
 
-class CourseViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated, ]
-    def get(self):
-        return render('/static/courses/blockchain.html')
-
 def activate_account(request, uidb64, token):
     try:
         uid = force_bytes(urlsafe_base64_decode(uidb64))

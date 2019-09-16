@@ -2573,6 +2573,7 @@ section {
 
 .show-sidebar {
     right: 0;
+    display: block!important;
 }
 
 .header-desktop3 {
