@@ -40,9 +40,11 @@ class ConceptualLearningModule extends Component {
         ConceptualLearningModule.updateUserPanel();
         this.props.fetchProgress();
         this.props.fetchCourses();
+        () => this.handleProgress();
         this.state.isFetching = false;
         document.addEventListener('keydown', this.handleKeyPress);
         window.addEventListener('message', this.handleIframeChange);
+
 
     }
 
@@ -58,7 +60,6 @@ class ConceptualLearningModule extends Component {
         var iframe = e.target; // it is equal to "this.videoFrame" and so, you can avoid using "ref"
         //this.videoFrame.addEventListener('keydown',this.onVideoDown);
         iframe.contentWindow.document.addEventListener('keydown', this.handleKeyPress);
-
         this.handleProgress();
     }
 
