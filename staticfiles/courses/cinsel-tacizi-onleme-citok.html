@@ -109,9 +109,10 @@
 				<section data-state="certificate">
 					<h3>TEBRİKLER!</h3>
 					<p>Cinsel Tacizi Önleme Eğitimi'ni tamamladın!</p>
-						<p>Sertifikanı almak için aşağıdaki butona tıkla. <i class="fas fa-rocket"></i>
+						<p>Sertifikanı almak için aşağıdaki 5 soruluk kısa anketi tamamlaman yeterli olacak. <i class="fas fa-rocket"></i>
 					</p>
-					<button onClick="submitCertificate()" class="au-btn-filter"><i class="fas fa-certificate"></i><i class="fas fa-address-card"></i><span id="certificate-name"></span> - BlockLearn Başarı Sertifikası</button>
+					<button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSf9o8LUvQgGduNoAk0hQEJyaQb55r1ZGcnzskhgj0IqnJouWA/viewform?embedded=true','popUpWindow','height=auto,width=auto,scrollbars=yes,menubar=no'); return false;"
+ class="au-btn-filter"><i class="fas fa-certificate"></i><i class="fas fa-address-card"></i><span id="certificate-name"></span> - BlockLearn Başarı Sertifikası</button>
 
 				</section>
 
@@ -146,7 +147,6 @@
 				parent.postMessage("goToCoding");
 			}
 			function submitCertificate() {
-				alert("ok");
 			}
 		</script>
 

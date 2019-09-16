@@ -115,7 +115,7 @@ import { TimerContext } from '../UserPanel';
                                 !this.props.onLearningPage ? <div className="au-breadcrumb-right"></div> : (
                                   <div className="au-breadcrumb-right">
                                     <button className="au-btn" id="save-progress" onClick={this.submitProgress}>Save My Progress</button>&nbsp;
-                                    <button className="au-btn" id="fullscreen-button" onClick={this.fullscreen}>Fullscreen</button>
+                                    <button className="au-btn" id="fullscreen-button" onClick={this.fullscreen}><i className="fas fa-expand"></i></button>
                                   </div>
                               )}
                           </div>
