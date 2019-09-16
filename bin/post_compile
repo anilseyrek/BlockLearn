@@ -9,8 +9,8 @@ if [ -f bin/run_collectstatic ] && [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$
     bin/run_collectstatic
 fi
 
-echo "-----> Running manage.py check --deploy --fail-level WARNING"
-python manage.py check --deploy --fail-level WARNING
+echo "-----> Running manage.py check --deploy --fail-level ERROR"
+python manage.py check --deploy --fail-level ERROR
 
 if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
     echo "-----> Running manage.py migrate"
