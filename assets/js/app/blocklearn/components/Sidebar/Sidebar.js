@@ -66,7 +66,7 @@ class Sidebar extends Component {
                         <img src={"/static/images/icon/avatar.svg"} alt="Profile Avatar" />
                     </div>
                     <h4 className="name">{this.props.user.username}</h4>
-                    <a href="#" onClick={(e) => this.onClickSignOut(e)} >Sign out</a>
+                    <a href="#" onClick={(e) => this.onClickSignOut(e)} >Logout</a>
                 </div>
                 {
                   !this.props.onLearningPage ? <nav className="navbar-sidebar2"></nav> : (

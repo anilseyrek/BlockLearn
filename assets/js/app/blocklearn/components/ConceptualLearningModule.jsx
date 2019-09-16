@@ -28,6 +28,7 @@ class ConceptualLearningModule extends Component {
         progress_number: "",
         last_reached_progress: "",
         updateProgressId: null,
+        total_progress_number: "",
       };
       this.handleEnter = this.handleEnter.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -131,7 +132,7 @@ class ConceptualLearningModule extends Component {
         //Extract static course
         courseURL = courseURL.substring(0, courseURL.indexOf("#"));
 
-        document.getElementById("progressNo").innerHTML = progressText + " / 11" ;
+        document.getElementById("progressNo").innerHTML = progressText + " / " + this.state.total_progress_number ;
         //console.log(this.state.progressSaved);
         if(e.data === "slidechanged" && (!(this.state.progressSaved) || n === null)) this.setState({timerOn: true});
         else this.setState({timerOn: false, progressSaved: false});
@@ -282,6 +283,7 @@ class ConceptualLearningModule extends Component {
         tempCourse = this.props.courses[i];
         if(cCode === tempCourse.course_code) break;
       }
+      this.setState({total_progress_number: tempCourse.total_progress_number});
 
       if (this.props.progress.length === 0) {
         this.props.addProgress(tempCourse.course_URL, tempCourse.course_name, tempCourse.course_code, "0", "0").then(this.resetForm);
@@ -338,7 +340,7 @@ class ConceptualLearningModule extends Component {
           </div>
           <div className="page-container2">
 
-                  <Header />
+                  <Header onLearningPage={true} progressIndex={this.state.updateProgressId} />
                   <Breadcrumb progressIndex={this.state.updateProgressId} onLearningPage={true} pageName={this.state.course_name} handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
                   {
                     isFetching ? <div>Loading...</div> : (
