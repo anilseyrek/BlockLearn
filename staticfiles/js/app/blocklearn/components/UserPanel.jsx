@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Sidebar2 from './Sidebar2';
+import CourseCatalogue from './CourseCatalogue';
 import Breadcrumb from './Breadcrumb'
 import PerfectScrollbar from 'perfect-scrollbar';
 import Timer from 'react-timer-wrapper';
@@ -20,126 +20,28 @@ class UserPanel extends Component {
         timerOn: false,
         progressSaved: false,
         contentActive: false,
+        isFetching: true,
+        course_URL: "",
+        course_code: "",
+        course_name: "",
+        progress_number: "",
+        last_reached_progress: "",
+        updateProgressId: null,
       };
-      this.handleEnter = this.handleEnter.bind(this);
-      this.handleKeyPress = this.handleKeyPress.bind(this);
-      this.handleTimer = this.handleTimer.bind(this);
-      this.handleProgressSave = this.handleProgressSave.bind(this);
     }
 
     componentDidMount() {
         UserPanel.updateUserPanel();
         this.props.fetchProgress();
         this.state.isFetching = false;
-        document.addEventListener('keydown', this.handleKeyPress);
-        window.addEventListener('message', this.handleIframeChange);
     }
 
     componentWillUnmount(){
-      document.removeEventListener('keydown', this.handleKeyPress);
     }
 
     componentDidUpdate() {
-        //this.props.fetchProgress();
-      //UserPanel.updateUserPanel();
-    }
-
-    iframeLoad(e){
-      var iframe = e.target; // it is equal to "this.videoFrame" and so, you can avoid using "ref"
-    //this.videoFrame.addEventListener('keydown',this.onVideoDown);
-      iframe.contentWindow.document.addEventListener('keydown', this.handleKeyPress);
-    }
-
-    state = {
-        isFetching: true,
-        course_URL: "",
-        course_code: "",
-        course_name: "",
-        progress_number: "",
-        updateProgressId: null,
-    }
-
-    handleEnter = () => {
-      this.setState({
-        message: this.state.message + 'You pressed the space key! '
-      });
-    }
-    handleKeyPress = (event) => {
-      //
-      if (event.keyCode === 32) {
-        this.handleEnter();
-      }
-    }
-    handleTimer = (timerSetting) => {
-      this.setState({
-        timerOn: timerSetting
-      })
-    }
-    handleProgressSave = (progressSavedState) => {
-      this.setState({
-        progressSaved: progressSavedState
-      })
-    }
-    resizeIframe = () => {
-      var buffer = 20; //scroll bar buffer
-      var iframe = document.getElementById('slide-deck');
-
-      function pageY(elem) {
-          return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
-      }
-
-      function resize() {
-          var height = document.documentElement.clientHeight;
-          height -= pageY(document.getElementById('slide-deck'))+ buffer ;
-          height = (height < 0) ? 0 : height;
-          document.getElementById('slide-deck').style.height = height + 'px';
-      }
-
-      // .onload doesn't work with IE8 and older.
-      if (iframe.attachEvent) {
-          iframe.attachEvent("onload", resize);
-      } else {
-          iframe.onload=resize;
-      }
-
-      window.onresize = resize;
 
     }
-    handleIframeChange = (e) => {
-      if (e.data === "slidechanged" || e.data === "Reveal_Initialized") {
-
-        this.resizeIframe();
-
-        var courseURL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
-
-        //Regex for progress number
-         var re1='.*?';	// Non-greedy match on filler
-         var re2='(#)';	// Any Single Character 1
-         var re3='(\\/)';	// Any Single Character 2
-         var re4='(\\d+)';	// Integer Number 1
-
-        var regex1 = new RegExp(re1+re2+re3+re4,["i"]);
-        var regex2 = new RegExp(re1+re2+re3+re1+re3+re4,["i"]);
-        var m = regex1.exec(courseURL);
-        var n = regex2.exec(courseURL);
-        //Check if URL contains progress number
-        let progressText = (m !== null) ? m[3] : "0";
-        //Extract static course
-        courseURL = courseURL.substring(0, courseURL.indexOf("#"));
-
-        document.getElementById("progressNo").innerHTML = progressText + " / 11" ;
-        //console.log(this.state.progressSaved);
-        if(e.data === "slidechanged" && (!(this.state.progressSaved) || n === null)) this.setState({timerOn: true});
-        else this.setState({timerOn: false, progressSaved: false});
-        /*{
-          if(n === null) this.setState({timerOn: true});
-          else this.setState({timerOn: false});
-        }*/
-      }
-      if(e.data === "goToCoding") {
-        this.props.history.push('/experiential');
-      }
-    };
 
     static updateUserPanel(){
 
@@ -252,65 +154,38 @@ class UserPanel extends Component {
     }
 
     resetForm = () => {
-        this.setState({course_URL: "", progress_number: "", updateProgressId: null});
+        this.setState({course_URL: "", progress_number: "", last_reached_progress: "", updateProgressId: null});
     }
 
     selectForEdit = (id) => {
         let progress = this.props.progress[id];
-        this.setState({course_URL: progress.course_URL, progress_number: progress.progress_number, updateProgressId: id});
+        this.setState({course_URL: progress.course_URL, progress_number: progress.progress_number, last_reached_progress: progress.last_reached_progress, updateProgressId: id});
     }
 
     submitProgress = (e) => {
         e.preventDefault();
         if (this.state.updateProgressId === null) {
-            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm)
+            this.props.addProgress(this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number, this.state.last_reached_progress).then(this.resetForm)
         } else {
-            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number).then(this.resetForm);
+            this.props.updateProgress(this.state.updateProgressId, this.state.course_URL, this.state.course_name, this.state.course_code, this.state.progress_number, this.state.last_reached_progress).then(this.resetForm);
         }
     }
 
-
-
     render() {
-        var handleTimer = this.handleTimer;
-        var handleProgressSave = this.handleProgressSave;
         const {isFetching, timerOn} = this.state;
-        const timeOn = false;
-        let firstCourse = null;
-        if (this.props.progress.length === 0) {
-          firstCourse = "/static/courses/blockchain.html";
-        }
 
         return (
 
           <div>
           <div className="page-wrapper">
-              <Sidebar2 timerOn={this.state.timerOn} contentActive={this.state.contentActive}/>
+              <Sidebar onLearningPage={false} timerOn={this.state.timerOn} contentActive={this.state.contentActive}/>
           </div>
           <div className="page-container2">
 
                   <Header />
-                  <Breadcrumb courseName="Introduction to Blockchain" handleTimer={handleTimer.bind(this)} handleProgressSave={handleProgressSave.bind(this)}/>
-                  {
-                    isFetching ? <div>Loading...</div> : (
-                      <section className="statistic">
-                        <div className="section__content section__content">
-                            <div id="slide-deck-container">
-                              {
-                                firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={firstCourse}>
-                                    Your browser is not supported.
-                                </iframe> : (
-                                this.props.progress.slice(0, 1).map((progress) => (
-                                  <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress_number}`} onLoad={(e) => this.iframeLoad(e)} >
-                                      Your browser is not supported.
-                                  </iframe>
-                                ))
+                  <Breadcrumb onLearningPage={false} pageName="Catalogue" />
+                  <CourseCatalogue />
 
-                              )}
-                            </div>
-                        </div>
-                    </section>
-                  )}
 
           </div>
         </div>
@@ -331,11 +206,11 @@ const mapDispatchToProps = dispatch => {
         fetchProgress: () => {
             dispatch(progress.fetchProgress());
         },
-        addProgress: (course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number));
+        addProgress: (course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number, last_reached_progress));
         },
-        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number) => {
-            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number));
+        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number, last_reached_progress));
         },
         deleteProgress: (id) => {
             dispatch(progress.deleteProgress(id));
@@ -345,6 +220,29 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
+/*
+{
+  isFetching ? <div>Loading...</div> : (
+    <section className="statistic">
+      <div className="section__content section__content">
+          <div id="slide-deck-container">
+            {
+              firstCourse ? <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" src={firstCourse}>
+                  Your browser is not supported.
+              </iframe> : (
+              this.props.progress.slice(0, 1).map((progress) => (
+                <iframe id="slide-deck" width="100%" height="100%" marginHeight="0" marginWidth="0" key={`progress_${progress.id}`} src={`${progress.course_URL}#/${progress.progress_number}`} onLoad={(e) => this.iframeLoad(e)} >
+                    Your browser is not supported.
+                </iframe>
+              ))
+
+            )}
+          </div>
+      </div>
+  </section>
+)}
+*/
+
 
 /*              <section>{JSON.stringify(this.props.progress[0])}<br/>
               <table>

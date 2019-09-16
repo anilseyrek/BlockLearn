@@ -33,34 +33,12 @@ export default class Header extends Component {
                               <div className="setting-menu js-right-sidebar d-none d-lg-block">
                                   <div className="account-dropdown__body">
                                       <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-account"></i>Account</a>
+                                          <a href="/">
+                                              <i className="zmdi zmdi-globe"></i>Home</a>
                                       </div>
                                       <div className="account-dropdown__item">
                                           <a href="#">
-                                              <i className="zmdi zmdi-settings"></i>Setting</a>
-                                      </div>
-                                      <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-money-box"></i>Billing</a>
-                                      </div>
-                                  </div>
-                                  <div className="account-dropdown__body">
-                                      <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-globe"></i>Language</a>
-                                      </div>
-                                      <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-pin"></i>Location</a>
-                                      </div>
-                                      <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-email"></i>Email</a>
-                                      </div>
-                                      <div className="account-dropdown__item">
-                                          <a href="#">
-                                              <i className="zmdi zmdi-notifications"></i>Notifications</a>
+                                              <i className="zmdi zmdi-account"></i>Logout</a>
                                       </div>
                                   </div>
                               </div>

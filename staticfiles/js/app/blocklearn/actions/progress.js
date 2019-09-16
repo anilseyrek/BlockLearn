@@ -23,7 +23,7 @@ export const fetchProgress = () => {
             })
             .then(res => {
                 if (res.status === 200) {
-                    return dispatch({type: 'FETCH_PROGRESS', progress: res.data});
+                    return dispatch({type: 'FETCH_PROGRESS', progresses: res.data});
                 } else if (res.status === 401 || res.status === 403) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
                     throw res.data;
@@ -32,7 +32,7 @@ export const fetchProgress = () => {
     }
 }
 
-export const addProgress = (course_URL, course_name, course_code, progress_number )=> {
+export const addProgress = (course_URL, course_name, course_code, progress_number, last_reached_progress )=> {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
         let {token} = getState().auth;
@@ -40,8 +40,8 @@ export const addProgress = (course_URL, course_name, course_code, progress_numbe
         if (token) {
             headers["Authorization"] = `Token ${token}`;
         }
+        let body = JSON.stringify({course_URL, course_name, course_code, progress_number, last_reached_progress, });
 
-        let body = JSON.stringify({course_URL, course_name, course_code, progress_number, });
         return fetch("/api/progress/", {headers, method: "POST", body})
             .then(res => {
                 if (res.status < 500) {
@@ -64,7 +64,7 @@ export const addProgress = (course_URL, course_name, course_code, progress_numbe
     }
 }
 
-export const updateProgress = (courseIndex, index, course_URL, course_name, course_code, progress_number) => {
+export const updateProgress = (courseIndex, index, course_URL, course_name, course_code, progress_number, last_reached_progress) => {
     return (dispatch, getState) => {
 
         let headers = {"Content-Type": "application/json"};
@@ -74,7 +74,7 @@ export const updateProgress = (courseIndex, index, course_URL, course_name, cour
             headers["authorization"] = `Token ${token}`;
         }
 
-        let body = JSON.stringify({course_URL, course_name, course_code, progress_number, });
+        let body = JSON.stringify({course_URL, course_name, course_code, progress_number, last_reached_progress, });
         let progressId = index;
 
         return fetch(`/api/progress/${progressId}/`, {headers, method: "PUT", body})

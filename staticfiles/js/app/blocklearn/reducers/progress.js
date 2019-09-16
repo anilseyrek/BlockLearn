@@ -8,7 +8,7 @@ export default function progress(state=initialState, action) {
     switch (action.type) {
 
         case 'FETCH_PROGRESS':
-            return [...state, ...action.progress];
+            return [...state, ...action.progresses];
 
         case 'ADD_PROGRESS':
             return [...state, action.progress];
