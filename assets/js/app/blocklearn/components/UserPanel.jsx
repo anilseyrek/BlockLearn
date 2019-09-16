@@ -182,7 +182,7 @@ class UserPanel extends Component {
           </div>
           <div className="page-container2">
 
-                  <Header />
+                  <Header onLearningPage={false} />
                   <Breadcrumb onLearningPage={false} pageName="Catalogue" />
                   <CourseCatalogue />
 

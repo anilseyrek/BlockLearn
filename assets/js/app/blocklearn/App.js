@@ -15,6 +15,7 @@ import ConceptPage from "./components/ConceptPage"
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import LogoutPage from "./components/LogoutPage";
 
 
 let store = createStore(progressApp, applyMiddleware(thunk));
@@ -71,6 +72,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/" component={UserPanel} />
                     <PrivateRoute exact path="/experiential" component={CodingPanel} />
                     <PrivateRoute exact path="/conceptual/:courseCode" component={ConceptualLearningModule} />
+                    <PrivateRoute exact path="/logout" component={LogoutPage} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />

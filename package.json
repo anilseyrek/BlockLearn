@@ -38,7 +38,7 @@
     "postcss": "^7.0.13",
     "postcss-loader": "^2.0.6",
     "pretty-ms": "^4.0.0",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.3.1",

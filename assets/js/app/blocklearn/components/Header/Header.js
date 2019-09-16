@@ -1,9 +1,50 @@
 // Header.js
 import React, {Component} from 'react';
-//import logo from '../../../images/icon/logo-white.png'
+import {connect} from 'react-redux';
+import {progress, auth} from "../../actions";
 
+class Header extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      }
+    }
 
-export default class Header extends Component {
+    submitProgress() {
+
+      let courseIndex = this.props.progressIndex;
+      let _progress = this.props.progress[courseIndex];
+      //console.log(document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, ''));
+      _progress.course_URL = document.getElementById("slide-deck").contentWindow.location.href.replace('http://' + window.location.hostname + ':' + window.location.port, '');
+      let courseURL = _progress.course_URL; //.substring(progress.course_URL.indexOf("#") + 1);;
+      //Regex for progress number
+       var re1='.*?';	// Non-greedy match on filler
+       var re2='(#)';	// Any Single Character 1
+       var re3='(\\/)';	// Any Single Character 2
+       var re4='(\\d+)';	// Integer Number 1
+
+      var p = new RegExp(re1+re2+re3+re4,["i"]);
+      var m = p.exec(courseURL);
+      //Check if URL contains progress number
+      let progressText = (m !== null) ? m[3] : "0";
+      //console.log(progressText);
+      //Extract static course
+      courseURL = courseURL.substring(0, courseURL.indexOf("#"));
+
+      this.props.progress[courseIndex].progress_number = progressText;
+
+      this.setState({course_URL: courseURL, progress_number: progressText, updateProgressId: _progress.id});
+      //console.log(progressText);
+      this.props.updateProgress(courseIndex, _progress.id, courseURL, _progress.course_name, _progress.course_code, progressText, _progress.last_reached_progress);
+      this.setState({timerOn: false});
+    }
+
+    onClickSignOut(e) {
+      console.log("hele hele");
+      if(this.props.onLearningPage) this.submitProgress();
+      this.props.logout();
+    }
+
     render(){
         return (
           <header className="header-desktop2">
@@ -37,7 +78,7 @@ export default class Header extends Component {
                                               <i className="zmdi zmdi-globe"></i>Home</a>
                                       </div>
                                       <div className="account-dropdown__item">
-                                          <a href="#">
+                                          <a href="/logout" onClick={(e) => this.onClickSignOut(e)}>
                                               <i className="zmdi zmdi-account"></i>Logout</a>
                                       </div>
                                   </div>
@@ -50,6 +91,35 @@ export default class Header extends Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        progress: state.progress,
+        user: state.auth.user,
+        onLearningPage: ownProps.onLearningPage,
+        progressIndex: ownProps.progressIndex,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchProgress: () => {
+            dispatch(progress.fetchProgress());
+        },
+        addProgress: (course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.addProgress(course_URL, course_name, course_code, progress_number, last_reached_progress));
+        },
+        updateProgress: (courseIndex, id, course_URL, course_name, course_code, progress_number, last_reached_progress) => {
+            return dispatch(progress.updateProgress(courseIndex, id, course_URL, course_name, course_code, progress_number, last_reached_progress));
+        },
+        deleteProgress: (id) => {
+            dispatch(progress.deleteProgress(id));
+        },
+        logout: () => dispatch(auth.logout()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 
 //////NOTIFICATION ELEMENTS

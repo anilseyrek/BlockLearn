@@ -34,13 +34,19 @@ class RegistrationAPI(generics.GenericAPIView):
         email_subject = 'BlockLearn | Activate Your Account'
         to_email = user.email
 
-        message = render_to_string('activate_account.html', {
+        message_plain = render_to_string('activate_account.txt', {
             'user': user,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
-        send_mail(email_subject, message, 'no-reply@blocklearn.xyz', [to_email], fail_silently=False)
+        message_html = render_to_string('activate_account.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+        })
+        send_mail(email_subject, message_plain, 'no-reply@blocklearn.xyz', [to_email], html_message=message_html, fail_silently=False)
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
