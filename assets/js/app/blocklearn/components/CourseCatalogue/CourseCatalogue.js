@@ -24,6 +24,17 @@ class CourseCatalogue extends Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6 col-lg-3">
+                              <Link to="/conceptual/bl-the-1">
+                                <div className="statistic__item">
+                                    <h3 className="number"><span className="desc">BL-THE-1</span></h3>
+                                    <h3>TEMEL HAVACILIK EĞİTİMİ</h3>
+                                    <div className="icon">
+                                        <i className="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                              </Link>
+                            </div>
+                            <div className="col-md-6 col-lg-3">
                               <Link to="/conceptual/boun-ct-1">
                                 <div className="statistic__item">
                                     <h3 className="number"><span className="desc">BOUN-CT-1</span></h3>

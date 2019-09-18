@@ -3,8 +3,14 @@ var webpack = require('webpack');
 var baseConfig = require('./webpack.base.config');
 var SpritesmithPlugin = require('webpack-spritesmith');
 var BundleTracker = require('webpack-bundle-tracker');
+var NgrockWebpackPlugin = require('ngrock-webpack-plugin');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
+
+// If you are testing with ngrok, update this to your tunnel link
+// And do not forget to uncomment devServer settings at the end
+// var hostname = 'https://a7c63c58.ngrok.io'
+var hostname = 'http://localhost:3000'
 
 baseConfig[0].mode = 'development'
 baseConfig[1].mode = 'development'
@@ -79,10 +85,10 @@ baseConfig[1].entry = [
 */
 ]
 
-baseConfig[0].output['publicPath'] = 'http://localhost:3000/assets/bundles/';
+baseConfig[0].output['publicPath'] = hostname + '/assets/bundles/';
 baseConfig[1].output = {
   path: path.resolve('./assets/webpack_bundles/'),
-  publicPath: 'http://localhost:3000/assets/webpack_bundles/',
+  publicPath: hostname + '/assets/webpack_bundles/',
   filename: '[name].js',
 }
 
@@ -97,6 +103,7 @@ baseConfig[1].module.rules.push({
 });
 
 baseConfig[1].plugins = [
+  //new NgrockWebpackPlugin({port:3000}),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),  // don't reload if there is an error
@@ -142,5 +149,16 @@ baseConfig[1].plugins = [
     Util: "exports-loader?Util!bootstrap/js/dist/util",
   })
 ]
+
+/*
+baseConfig[1].devServer = {
+    compress: true,
+    disableHostCheck: true,
+    public: 'a7c63c58.ngrok.io',
+    allowedHosts: [
+      'a7c63c58.ngrok.io'
+    ]
+}
+*/
 
 module.exports = baseConfig;
