@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User #AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser #PermissionsMixin
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
@@ -6,6 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from common.models import IndexedTimeStampedModel
 
 #from .managers import UserManager
+
+class User(AbstractUser):
+    email = models.EmailField(max_length=255, unique=True)
+
+    class Meta:
+        db_table = "auth_user"
 
 '''
 class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):

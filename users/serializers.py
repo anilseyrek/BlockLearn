@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from .models import Progress
+from .models import User, Progress
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,6 +10,9 @@ class CreateUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
+        if User.objects.filter(email=validated_data['email']).exists():
+            print("email exists")
+            raise serializers.ValidationError("Email exists")
         user = User.objects.create_user(validated_data['username'],
                                         validated_data['email'],
                                         validated_data['password'])

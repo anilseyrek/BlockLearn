@@ -10,9 +10,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 admin.site.register(Course, CourseAdmin)
 
-'''
 class CustomUserAdmin(UserAdmin):
-    list_display = ('id', 'email', 'created', 'modified')
     list_filter = ('is_active', 'is_staff', 'groups')
     search_fields = ('email',)
     ordering = ('email',)
@@ -31,4 +29,3 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
-'''

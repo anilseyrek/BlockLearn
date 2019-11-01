@@ -7,6 +7,8 @@ var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
+var hostname = 'https://blocklearn-test.herokuapp.com'
+
 baseConfig[0].mode = 'production'
 baseConfig[1].mode = 'production'
 
@@ -83,11 +85,11 @@ baseConfig[1].entry = [
 
 baseConfig[0].output = {
   path: path.resolve('./staticfiles/bundles/'),
-  publicPath: 'https://blocklearnxyz.herokuapp.com/static/bundles/',
+  publicPath: hostname + '/static/bundles/',
 }
 baseConfig[1].output = {
   path: path.resolve('./staticfiles/webpack_bundles/'),
-  publicPath: 'https://blocklearnxyz.herokuapp.com/static/webpack_bundles/',
+  publicPath: hostname + '/static/webpack_bundles/',
   filename: '[name]-[hash].js',
 }
 
