@@ -43,6 +43,6 @@ class LoginUserSerializer(serializers.Serializer):
         user = authenticate(**data)
         if user and user.is_active:
             return user
-        elif not user.is_active:
+        elif user and not user.is_active:
             raise serializers.ValidationError("Email activation required!")
         raise serializers.ValidationError("Unable to log in with provided credentials.")

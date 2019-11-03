@@ -22,6 +22,8 @@ ADMINS = (
     ('Admin', 'anilseyrek@gmail.com'),
 )
 
+DEFAULT_FROM_EMAIL = 'BlockLearn <no-reply@blocklearn.xyz>'
+
 AUTH_USER_MODEL = 'users.User'
 
 ALLOWED_HOSTS = []
