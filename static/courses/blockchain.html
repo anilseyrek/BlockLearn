@@ -167,24 +167,40 @@
 		<script type="text/javascript" src="js/reveal.js"></script>
 
 		<script>
-			function getQuizResult(num){
-				var iframe = document.getElementById('quiz'+num);
-				var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-				return innerDoc.querySelector('.score').innerHTML;
-			}
-			function getChapterResult(num){
-				var iframe = document.getElementById('chapter'+num);
-				var innerDoc = /*iframe.contentDocument ||*/ iframe.contentWindow.document;
-				return innerDoc.querySelector('.protractor-test-conversation-content').innerHTML;
-			}
+			const selectionWords = [['blockchain','cryptographic hash'],
+				['centralized','decentralized','distributed','Satoshi Nakomoto','Bitcoin'],
+		    ['peer-to-peer','shared ledger','smart contract'],
+		    ['Ethereum','Vitalik Buterin','ether','DApp','Distributed Ledger Technology (DLT)','CryptoKitties'],
+		    ['consensus','provenance','immutability','finality'],
+		    ['transparent and auditable','consensus-based','transactional','miner','computational power','smart regulatory']
+			];
+
 			function goToSlide(num){
 				Reveal.slide(num);
 			}
 			function submitSelection() {
 				var iframe = document.getElementById('selection-quiz');
 				var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-				console.log(innerDoc.getElementById('pre-selected-options').selectedOptions);
-				goToSlide(5);
+				var userSelections = Array.prototype.slice.call( innerDoc.getElementById('pre-selected-options').selectedOptions );
+
+				var userSelectionsAsArray = userSelections.map(obj =>{
+				   newValue = obj.value;
+				   return newValue;
+				});
+
+				//Go to result + 3 since there are introductory slides in deck
+				goToSlide(getQuizResults(userSelectionsAsArray) + 3);
+
+			}
+			function getQuizResults(userSelectionsAsArray){
+				var resultLevel = 0;
+				for(var i = 0; i < selectionWords.length; i++){
+						let checker = selectionWords[i].every(v => userSelectionsAsArray.includes(v));
+						if(selectionWords[i].every(v => userSelectionsAsArray.includes(v))){
+							resultLevel = i+1;
+						}
+				}
+				return resultLevel;
 			}
 			function goToCoding(){
 				parent.postMessage("goToCoding");
